@@ -24,6 +24,22 @@
 		92038769246514F000ECFCCD /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387602465149200ECFCCD /* ImageList.swift */; };
 		9203876A246514F000ECFCCD /* ImageSizeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92038762246514D700ECFCCD /* ImageSizeInfo.swift */; };
 		9203876B246514F000ECFCCD /* FlickrError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203875C2465140E00ECFCCD /* FlickrError.swift */; };
+		9203876C2465154000ECFCCD /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874D24650FDC00ECFCCD /* Endpoint.swift */; };
+		9203876D2465154000ECFCCD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874F2465102200ECFCCD /* Session.swift */; };
+		9203876E2465154000ECFCCD /* TestSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387512465104900ECFCCD /* TestSession.swift */; };
+		9203876F2465154100ECFCCD /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874D24650FDC00ECFCCD /* Endpoint.swift */; };
+		920387702465154100ECFCCD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874F2465102200ECFCCD /* Session.swift */; };
+		920387712465154100ECFCCD /* TestSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387512465104900ECFCCD /* TestSession.swift */; };
+		920387722465154D00ECFCCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197024650C5D002981DD /* AppDelegate.swift */; };
+		920387732465154D00ECFCCD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197224650C5D002981DD /* SceneDelegate.swift */; };
+		920387742465154D00ECFCCD /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387552465124A00ECFCCD /* Utility.swift */; };
+		920387752465154D00ECFCCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197024650C5D002981DD /* AppDelegate.swift */; };
+		920387762465154D00ECFCCD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197224650C5D002981DD /* SceneDelegate.swift */; };
+		920387772465154D00ECFCCD /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387552465124A00ECFCCD /* Utility.swift */; };
+		920387782465155000ECFCCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9274197924650C5E002981DD /* Assets.xcassets */; };
+		920387792465155000ECFCCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9274197924650C5E002981DD /* Assets.xcassets */; };
+		9203877A2465155400ECFCCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274197B24650C5E002981DD /* LaunchScreen.storyboard */; };
+		9203877B2465155400ECFCCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274197B24650C5E002981DD /* LaunchScreen.storyboard */; };
 		9274197124650C5D002981DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197024650C5D002981DD /* AppDelegate.swift */; };
 		9274197324650C5D002981DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197224650C5D002981DD /* SceneDelegate.swift */; };
 		9274197524650C5D002981DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197424650C5D002981DD /* ViewController.swift */; };
@@ -298,6 +314,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920387782465155000ECFCCD /* Assets.xcassets in Resources */,
+				9203877A2465155400ECFCCD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +323,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920387792465155000ECFCCD /* Assets.xcassets in Resources */,
+				9203877B2465155400ECFCCD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,10 +353,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9203876E2465154000ECFCCD /* TestSession.swift in Sources */,
+				9203876D2465154000ECFCCD /* Session.swift in Sources */,
 				92038766246514F000ECFCCD /* ImageSizeInfo.swift in Sources */,
+				920387742465154D00ECFCCD /* Utility.swift in Sources */,
+				920387722465154D00ECFCCD /* AppDelegate.swift in Sources */,
 				92038765246514F000ECFCCD /* ImageList.swift in Sources */,
+				920387732465154D00ECFCCD /* SceneDelegate.swift in Sources */,
 				9274198824650C5E002981DD /* FlickrTests.swift in Sources */,
 				92038764246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
+				9203876C2465154000ECFCCD /* Endpoint.swift in Sources */,
 				92038767246514F000ECFCCD /* FlickrError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,10 +371,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920387712465154100ECFCCD /* TestSession.swift in Sources */,
+				920387702465154100ECFCCD /* Session.swift in Sources */,
 				9203876A246514F000ECFCCD /* ImageSizeInfo.swift in Sources */,
+				920387772465154D00ECFCCD /* Utility.swift in Sources */,
+				920387752465154D00ECFCCD /* AppDelegate.swift in Sources */,
 				92038769246514F000ECFCCD /* ImageList.swift in Sources */,
+				920387762465154D00ECFCCD /* SceneDelegate.swift in Sources */,
 				9274199324650C5E002981DD /* FlickrUITests.swift in Sources */,
 				92038768246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
+				9203876F2465154100ECFCCD /* Endpoint.swift in Sources */,
 				9203876B246514F000ECFCCD /* FlickrError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
