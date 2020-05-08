@@ -42,6 +42,7 @@
 		9203877B2465155400ECFCCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274197B24650C5E002981DD /* LaunchScreen.storyboard */; };
 		920387822465189700ECFCCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197424650C5D002981DD /* ViewController.swift */; };
 		920387832465189800ECFCCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197424650C5D002981DD /* ViewController.swift */; };
+		92038785246518EB00ECFCCD /* Flickr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92038784246518EB00ECFCCD /* Flickr.swift */; };
 		9274197124650C5D002981DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197024650C5D002981DD /* AppDelegate.swift */; };
 		9274197324650C5D002981DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197224650C5D002981DD /* SceneDelegate.swift */; };
 		9274197524650C5D002981DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197424650C5D002981DD /* ViewController.swift */; };
@@ -78,6 +79,7 @@
 		9203875E2465144D00ECFCCD /* KeyedDecodingContainer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingContainer+.swift"; sourceTree = "<group>"; };
 		920387602465149200ECFCCD /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		92038762246514D700ECFCCD /* ImageSizeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSizeInfo.swift; sourceTree = "<group>"; };
+		92038784246518EB00ECFCCD /* Flickr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flickr.swift; sourceTree = "<group>"; };
 		9274196D24650C5D002981DD /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274197024650C5D002981DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9274197224650C5D002981DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				9203874D24650FDC00ECFCCD /* Endpoint.swift */,
 				9203874F2465102200ECFCCD /* Session.swift */,
 				920387512465104900ECFCCD /* TestSession.swift */,
+				92038784246518EB00ECFCCD /* Flickr.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
 				920387522465104900ECFCCD /* TestSession.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
+				92038785246518EB00ECFCCD /* Flickr.swift in Sources */,
 				920387612465149200ECFCCD /* ImageList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
