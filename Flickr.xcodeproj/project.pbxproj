@@ -74,6 +74,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9203874824650EC200ECFCCD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9274197024650C5D002981DD /* AppDelegate.swift */,
+				9274197224650C5D002981DD /* SceneDelegate.swift */,
+				9274197924650C5E002981DD /* Assets.xcassets */,
+				9274197B24650C5E002981DD /* LaunchScreen.storyboard */,
+				9274197E24650C5E002981DD /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9274196424650C5D002981DD = {
 			isa = PBXGroup;
 			children = (
@@ -97,12 +109,8 @@
 		9274196F24650C5D002981DD /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
-				9274197024650C5D002981DD /* AppDelegate.swift */,
-				9274197224650C5D002981DD /* SceneDelegate.swift */,
 				9274197424650C5D002981DD /* ViewController.swift */,
-				9274197924650C5E002981DD /* Assets.xcassets */,
-				9274197B24650C5E002981DD /* LaunchScreen.storyboard */,
-				9274197E24650C5E002981DD /* Info.plist */,
+				9203874824650EC200ECFCCD /* Supporting Files */,
 			);
 			path = Flickr;
 			sourceTree = "<group>";
