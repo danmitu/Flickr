@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874D24650FDC00ECFCCD /* Endpoint.swift */; };
+		920387502465102200ECFCCD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874F2465102200ECFCCD /* Session.swift */; };
+		920387522465104900ECFCCD /* TestSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387512465104900ECFCCD /* TestSession.swift */; };
 		9274197124650C5D002981DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197024650C5D002981DD /* AppDelegate.swift */; };
 		9274197324650C5D002981DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197224650C5D002981DD /* SceneDelegate.swift */; };
 		9274197524650C5D002981DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197424650C5D002981DD /* ViewController.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		9203874D24650FDC00ECFCCD /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		9203874F2465102200ECFCCD /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		920387512465104900ECFCCD /* TestSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSession.swift; sourceTree = "<group>"; };
 		9274196D24650C5D002981DD /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274197024650C5D002981DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9274197224650C5D002981DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				9203874D24650FDC00ECFCCD /* Endpoint.swift */,
+				9203874F2465102200ECFCCD /* Session.swift */,
+				920387512465104900ECFCCD /* TestSession.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -274,9 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920387502465102200ECFCCD /* Session.swift in Sources */,
 				9274197524650C5D002981DD /* ViewController.swift in Sources */,
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
 				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
+				920387522465104900ECFCCD /* TestSession.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
