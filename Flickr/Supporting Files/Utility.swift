@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Load a plist from the main bundle. Return it as a dictionary.
+/// Load a plist from a bundle. Return it as a dictionary.
 func propertyList(_ resource: String, bundle: Bundle) -> [String:AnyObject] {
 
     let filename = "\(resource).plist"

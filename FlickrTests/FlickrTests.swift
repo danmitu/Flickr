@@ -31,4 +31,10 @@ class FlickrTests: XCTestCase {
         }
     }
 
+    func testReadPropertyList() throws {
+        let plist = propertyList("APIKeys", bundle: Bundle.main)
+        let apiKey = plist["Flickr"]
+        XCTAssertNotNil(apiKey)
+    }
+    
 }
