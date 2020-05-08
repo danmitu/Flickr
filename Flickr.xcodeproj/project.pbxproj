@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9203874D24650FDC00ECFCCD /* Endpoint.swift */; };
 		9274197124650C5D002981DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197024650C5D002981DD /* AppDelegate.swift */; };
 		9274197324650C5D002981DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197224650C5D002981DD /* SceneDelegate.swift */; };
 		9274197524650C5D002981DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274197424650C5D002981DD /* ViewController.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9203874D24650FDC00ECFCCD /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		9274196D24650C5D002981DD /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274197024650C5D002981DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9274197224650C5D002981DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9203874C24650FCB00ECFCCD /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9203874D24650FDC00ECFCCD /* Endpoint.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		9274196424650C5D002981DD = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				9274197424650C5D002981DD /* ViewController.swift */,
+				9203874C24650FCB00ECFCCD /* Networking */,
 				9203874824650EC200ECFCCD /* Supporting Files */,
 			);
 			path = Flickr;
@@ -265,6 +276,7 @@
 			files = (
 				9274197524650C5D002981DD /* ViewController.swift in Sources */,
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
+				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
