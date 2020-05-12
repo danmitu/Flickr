@@ -67,6 +67,9 @@
 		92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
 		92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
 		92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
+		92B19FF5246A4C37003F3437 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* SearchViewModel.swift */; };
+		92B19FF6246A4C37003F3437 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* SearchViewModel.swift */; };
+		92B19FF7246A4C37003F3437 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +120,7 @@
 		9274199224650C5E002981DD /* FlickrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITests.swift; sourceTree = "<group>"; };
 		9274199424650C5E002981DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92B19FF0246A4B7E003F3437 /* OSLog+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+.swift"; sourceTree = "<group>"; };
+		92B19FF4246A4C37003F3437 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,7 @@
 			children = (
 				920387902465294A00ECFCCD /* Error.swift */,
 				92038788246519A300ECFCCD /* PagedListViewModel.swift */,
+				92B19FF4246A4C37003F3437 /* SearchViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -403,6 +408,7 @@
 				92038785246518EB00ECFCCD /* Flickr.swift in Sources */,
 				924709E52465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				92038789246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
+				92B19FF5246A4C37003F3437 /* SearchViewModel.swift in Sources */,
 				920387912465294A00ECFCCD /* Error.swift in Sources */,
 				920387612465149200ECFCCD /* ImageList.swift in Sources */,
 			);
@@ -418,6 +424,7 @@
 				92038766246514F000ECFCCD /* ImageSizeInfo.swift in Sources */,
 				920387742465154D00ECFCCD /* Utility.swift in Sources */,
 				920387722465154D00ECFCCD /* AppDelegate.swift in Sources */,
+				92B19FF6246A4C37003F3437 /* SearchViewModel.swift in Sources */,
 				92038765246514F000ECFCCD /* ImageList.swift in Sources */,
 				920387822465189700ECFCCD /* ViewController.swift in Sources */,
 				9203878E24651E7C00ECFCCD /* Flickr.swift in Sources */,
@@ -452,6 +459,7 @@
 				9203878B246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
 				924709E72465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				9203878F24651E7D00ECFCCD /* Flickr.swift in Sources */,
+				92B19FF7246A4C37003F3437 /* SearchViewModel.swift in Sources */,
 				920387932465294A00ECFCCD /* Error.swift in Sources */,
 				9203876B246514F000ECFCCD /* FlickrError.swift in Sources */,
 			);

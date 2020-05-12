@@ -12,7 +12,7 @@ class PagedListViewModel {
         
     private var photos = [ImageInfo]()
     private var sizes = [Identifier : ImageSizeInfo]()
-    private var currentPage = 1
+    private(set) var currentPage = 1
     private var numberPages: Int!
     private var totalImages: Int!
     private var isLoadingNextPage = false
@@ -21,7 +21,8 @@ class PagedListViewModel {
     
     var errorOccurred: ((Error)->Void)?
 
-    private var atLastPage: Bool {
+    
+    var atLastPage: Bool {
         guard let numberPages = numberPages else { return false }
         return currentPage == numberPages
     }
