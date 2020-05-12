@@ -94,9 +94,8 @@ class PagedListViewModel {
                     Environment.env.session.download(sizeEndpoint) { sizeInfoResult in
                         defer { zip.leave() }
                         switch sizeInfoResult {
-                        case let .failure(e):
-                            // TODO: Log Error
-                            break
+                        case let .failure(error):
+                            error.log() // We just log the error because this doesn't break anything too serious.
                         case let .success(imageSize):
                             sizeDict[photo.id] = imageSize
                         }

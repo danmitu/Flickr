@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 extension Error {
     
@@ -23,6 +24,19 @@ extension Error {
             default:
                 return "Unkown Error"
         }
+    }
+    
+    func log() {
+        switch self {
+        case let flickrError as FlickrError:
+            os_log("Flickr API Error code: %{PUBLIC}@", log: OSLog.network, type: .default, flickrError.code)
+        default:
+            os_log("%{PUBLIC}@", log: OSLog.network, type: .default, debugDescription)
+        }
+    }
+
+    var description: String {
+        return "There was an error."
     }
 
 }

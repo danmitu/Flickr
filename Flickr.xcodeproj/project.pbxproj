@@ -64,6 +64,9 @@
 		9274197A24650C5E002981DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9274197924650C5E002981DD /* Assets.xcassets */; };
 		9274197D24650C5E002981DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274197B24650C5E002981DD /* LaunchScreen.storyboard */; };
 		9274198824650C5E002981DD /* FlickrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274198724650C5E002981DD /* FlickrTests.swift */; };
+		92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
+		92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
+		92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +116,7 @@
 		9274198E24650C5E002981DD /* FlickrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274199224650C5E002981DD /* FlickrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITests.swift; sourceTree = "<group>"; };
 		9274199424650C5E002981DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92B19FF0246A4B7E003F3437 /* OSLog+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 				9274197024650C5D002981DD /* AppDelegate.swift */,
 				9274197224650C5D002981DD /* SceneDelegate.swift */,
 				920387552465124A00ECFCCD /* Utility.swift */,
+				92B19FF0246A4B7E003F3437 /* OSLog+.swift */,
 				924709E42465EA9400EC9F9E /* Dictionary+.swift */,
 				9274197924650C5E002981DD /* Assets.xcassets */,
 				9274197B24650C5E002981DD /* LaunchScreen.storyboard */,
@@ -390,6 +395,7 @@
 				920387502465102200ECFCCD /* Session.swift in Sources */,
 				9274197524650C5D002981DD /* ViewController.swift in Sources */,
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
+				92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92038763246514D700ECFCCD /* ImageSizeInfo.swift in Sources */,
 				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
 				920387522465104900ECFCCD /* TestSession.swift in Sources */,
@@ -420,6 +426,7 @@
 				924709E62465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				92038764246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876C2465154000ECFCCD /* Endpoint.swift in Sources */,
+				92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				9203878D24651E2500ECFCCD /* PageListViewModelTests.swift in Sources */,
 				9203878A246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
 				9203879824653F7C00ECFCCD /* FlickrUITests.swift in Sources */,
@@ -437,6 +444,7 @@
 				920387772465154D00ECFCCD /* Utility.swift in Sources */,
 				920387752465154D00ECFCCD /* AppDelegate.swift in Sources */,
 				92038769246514F000ECFCCD /* ImageList.swift in Sources */,
+				92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				920387832465189800ECFCCD /* ViewController.swift in Sources */,
 				920387762465154D00ECFCCD /* SceneDelegate.swift in Sources */,
 				92038768246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
