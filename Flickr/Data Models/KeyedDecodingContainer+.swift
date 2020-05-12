@@ -38,12 +38,12 @@ extension KeyedDecodingContainer {
         }
     }
     
-    /// Decodes into an `Float`, but also checks for a `String`.
-    func decodeFloatMaybeString(forKey key: Key) throws -> Float {
-        if let str = try? decode(String.self, forKey: key), let float = Float(str) {
-          return float
+    /// Decodes into an `Double`, but also checks for a `String`.
+    func decodeDoubleMaybeString(forKey key: Key) throws -> Double {
+        if let str = try? decode(String.self, forKey: key), let double = Double(str) {
+          return double
         } else {
-          return try decode(Float.self, forKey: key)
+          return try decode(Double.self, forKey: key)
         }
     }
     

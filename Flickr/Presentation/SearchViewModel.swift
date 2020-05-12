@@ -6,7 +6,7 @@
 //  Copyright © 2020 Dan Mitu. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class SearchViewModel {
 
@@ -36,7 +36,7 @@ class SearchViewModel {
     
     func url(at item: Int) -> URL { return pagedList.url(at: item) }
     
-    func size(at item: Int) -> CGSize { pagedList.size(at: item) }
+    func size(at item: Int) -> Size { pagedList.size(at: item) }
     
     var numberOfItems: Int { return pagedList.numberOfItems }
 

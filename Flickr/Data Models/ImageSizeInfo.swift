@@ -50,8 +50,7 @@ struct ImageSizes: Decodable {
 
 struct ImageSize: Decodable {
     let label: String
-    let width: Float
-    let height: Float
+    let size: Size
     let source: String
     let url: String
     let media: String
@@ -63,8 +62,9 @@ struct ImageSize: Decodable {
     init(from decoder: Decoder) throws {
         let values  = try decoder.container(keyedBy: CodingKeys.self)
         self.label  = try values.decode(String.self, forKey: .label)
-        self.width  = try values.decodeFloatMaybeString(forKey: .width)
-        self.height = try values.decodeFloatMaybeString(forKey: .height)
+        let width   = try values.decodeDoubleMaybeString(forKey: .width)
+        let height  = try values.decodeDoubleMaybeString(forKey: .height)
+        self.size   = Size(width: width, height: height)
         self.source = try values.decode(String.self, forKey: .source)
         self.url    = try values.decode(String.self, forKey: .url)
         self.media  = try values.decode(String.self, forKey: .media)
@@ -72,11 +72,7 @@ struct ImageSize: Decodable {
     
 }
 
-extension ImageSize {
-    
-    var size: CGSize {
-        return CGSize(width: CGFloat(width),
-                      height: CGFloat(height))
-    }
-    
+struct Size: Codable {
+    let width: Double
+    let height: Double
 }

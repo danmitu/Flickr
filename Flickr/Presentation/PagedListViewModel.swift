@@ -6,7 +6,7 @@
 //  Copyright © 2020 Dan Mitu. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class PagedListViewModel {
         
@@ -31,10 +31,10 @@ class PagedListViewModel {
     
     func url(at item: Int) -> URL { return photos[item].url }
     
-    func size(at item: Int) -> CGSize {
+    func size(at item: Int) -> Size {
         let id = photos[item].id
         let preferredSize = sizes[id]!.sizes.preferredSize
-        return CGSize(width: CGFloat(preferredSize.width), height: CGFloat(preferredSize.height))
+        return preferredSize.size
     }
     
     var numberOfItems: Int { return photos.count }
