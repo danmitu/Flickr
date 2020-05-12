@@ -1,0 +1,8 @@
+{ "photos": { "page": 1, "pages": 3, "perpage": 5, "total": "985040",
+"photo": [
+  { "id": "49871856888", "owner": "156795244@N08", "secret": "b067d139c4", "server": "65535", "farm": 66, "title": "Goodbye Winter", "ispublic": 1, "isfriend": 0, "isfamily": 0 },
+  { "id": "49871834028", "owner": "31057805@N02", "secret": "01ac7658ac", "server": "65535", "farm": 66, "title": "Preening goslings", "ispublic": 1, "isfriend": 0, "isfamily": 0 },
+  { "id": "49872366326", "owner": "31057805@N02", "secret": "068843b5c0", "server": "65535", "farm": 66, "title": "Nap time", "ispublic": 1, "isfriend": 0, "isfamily": 0 },
+  { "id": "49872676922", "owner": "31057805@N02", "secret": "87143afc97", "server": "65535", "farm": 66, "title": "By the Mommy's side", "ispublic": 1, "isfriend": 0, "isfamily": 0 },
+  { "id": "49872676387", "owner": "31057805@N02", "secret": "4fa21fa147", "server": "65535", "farm": 66, "title": "Gosling on the grass", "ispublic": 1, "isfriend": 0, "isfamily": 0 }
+] }, "stat": "ok" }

@@ -1,0 +1,13 @@
+{ "sizes": { "canblog": 0, "canprint": 0, "candownload": 0,
+"size": [
+  { "label": "Square", "width": 75, "height": 75, "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_s.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/sq\/", "media": "photo" },
+  { "label": "Large Square", "width": "150", "height": "150", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_q.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/q\/", "media": "photo" },
+  { "label": "Thumbnail", "width": 100, "height": 58, "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_t.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/t\/", "media": "photo" },
+  { "label": "Small", "width": "240", "height": "138", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_m.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/s\/", "media": "photo" },
+  { "label": "Small 320", "width": "320", "height": "184", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_n.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/n\/", "media": "photo" },
+  { "label": "Small 400", "width": "400", "height": "230", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_w.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/w\/", "media": "photo" },
+  { "label": "Medium", "width": "500", "height": "288", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/m\/", "media": "photo" },
+  { "label": "Medium 640", "width": "640", "height": "368", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_z.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/z\/", "media": "photo" },
+  { "label": "Medium 800", "width": "800", "height": "460", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_c.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/c\/", "media": "photo" },
+  { "label": "Large", "width": "1024", "height": "589", "source": "https:\/\/live.staticflickr.com\/65535\/49871834028_01ac7658ac_b.jpg", "url": "https:\/\/www.flickr.com\/photos\/v4vodka\/49871834028\/sizes\/l\/", "media": "photo" }
+] }, "stat": "ok" }

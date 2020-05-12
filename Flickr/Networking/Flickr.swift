@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Flickr {
+struct Flickr {
     
     private static let baseURL = URL(string: "https://www.flickr.com/services/rest/")!
     
@@ -16,7 +16,7 @@ public struct Flickr {
         return propertyList("APIKeys", bundle: Bundle.main)["Flickr"] as! String
     }()
 
-    func search(text: String, page: Int) -> Endpoint<ImageList> {
+    func search(text: String, page: Int, perPage: Int) -> Endpoint<ImageList> {
         
         let query: [String:String] = [
             "method":"flickr.photos.search",
@@ -26,7 +26,7 @@ public struct Flickr {
             "format":"json",
             "media":"photos",
             "page":"\(page)",
-            "per_page":"30"
+            "per_page":"\(perPage)"
         ]
         
         return Endpoint<ImageList>(
@@ -38,4 +38,24 @@ public struct Flickr {
             query: query)
     }
 
+    func getSizes(photoId: String) -> Endpoint<ImageSizeInfo> {
+        
+        let query = [
+            "method":"flickr.photos.getSizes",
+            "api_key":Flickr.apiKey,
+            "photo_id":photoId,
+            "nojsoncallback":"1",
+            "format":"json",
+        ]
+        
+        return Endpoint<ImageSizeInfo>(
+            json: .get,
+            url: Flickr.baseURL,
+            accept: ContentType.json,
+            headers: [:],
+            expectedStatusCode: expected200to300,
+            query: query
+        )
+    }
+    
 }

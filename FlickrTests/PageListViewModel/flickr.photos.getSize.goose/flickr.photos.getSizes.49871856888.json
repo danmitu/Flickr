@@ -1,0 +1,18 @@
+{ "sizes": { "canblog": 0, "canprint": 0, "candownload": 0,
+"size": [
+  { "label": "Square", "width": 75, "height": 75, "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_s.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/sq\/", "media": "photo" },
+  { "label": "Large Square", "width": "150", "height": "150", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_q.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/q\/", "media": "photo" },
+  { "label": "Thumbnail", "width": 100, "height": 66, "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_t.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/t\/", "media": "photo" },
+  { "label": "Small", "width": "240", "height": "158", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_m.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/s\/", "media": "photo" },
+  { "label": "Small 320", "width": "320", "height": "211", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_n.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/n\/", "media": "photo" },
+  { "label": "Small 400", "width": "400", "height": "264", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_w.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/w\/", "media": "photo" },
+  { "label": "Medium", "width": "500", "height": "329", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/m\/", "media": "photo" },
+  { "label": "Medium 640", "width": "640", "height": "422", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_z.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/z\/", "media": "photo" },
+  { "label": "Medium 800", "width": "800", "height": "527", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_c.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/c\/", "media": "photo" },
+  { "label": "Large", "width": "1024", "height": "675", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_b067d139c4_b.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/l\/", "media": "photo" },
+  { "label": "Large 1600", "width": "1600", "height": "1054", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_fc548940e9_h.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/h\/", "media": "photo" },
+  { "label": "Large 2048", "width": "2048", "height": "1349", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_6b806b091e_k.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/k\/", "media": "photo" },
+  { "label": "X-Large 3K", "width": "3072", "height": "2024", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_fb3798cee4_3k.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/3k\/", "media": "photo" },
+  { "label": "X-Large 4K", "width": "4096", "height": "2699", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_f4370be0b7_4k.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/4k\/", "media": "photo" },
+  { "label": "X-Large 5K", "width": "5120", "height": "3373", "source": "https:\/\/live.staticflickr.com\/65535\/49871856888_671e6b1f77_5k.jpg", "url": "https:\/\/www.flickr.com\/photos\/156795244@N08\/49871856888\/sizes\/5k\/", "media": "photo" }
+] }, "stat": "ok" }

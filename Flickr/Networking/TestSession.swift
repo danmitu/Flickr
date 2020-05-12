@@ -8,12 +8,12 @@
 import Foundation
 
 /**
-How to test...
-1. Create a test session with mock results for a given endpoint.
-2. Set the Environment session to a given test session.
-3. Perform all network requests with the environment session.
-4. Use `testSession.verify()` to verify that all the resuts were checked.
-*/
+ How to test...
+ 1. Create a test session with mock results for a given endpoint.
+ 2. Set the Environment session to a given test session.
+ 3. Perform all network requests with the environment session.
+ 4. Use `testSession.verify()` to verify that all the resuts were checked.
+ */
 
 /// An endpoint associated with an expected response.
 struct MockResult {
@@ -36,11 +36,14 @@ class TestSession: Session {
     init(mockResults: [MockResult]) {
         self.mockResults = mockResults
     }
-
+    
     /// Removes the `MockResult` every time it's found.
     func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) {
         /// Searches the mock responses for an endpoint match. Make sure it's the right type too.
-        guard let index = mockResults.firstIndex(where: { $0.endpoint.request == endpoint.request }) else {
+        guard let index = mockResults.firstIndex(where: {
+            let match = urlsMatch($0.endpoint.request.url!, b: endpoint.request.url!)
+            return match
+        }) else {
             fatalError("No such endpoint: \(endpoint.request.url!.absoluteString)")
         }
         let mockResult = mockResults[index]
@@ -60,6 +63,28 @@ class TestSession: Session {
     /// Verifies that there are no remaining mock results. Returns true if successful.
     func verify() -> Bool {
         return mockResults.isEmpty
+    }
+    
+    private func urlsMatch(_ a: URL, b: URL) -> Bool {
+        let allowedSchemes = Set(["http", "https"])
+        guard
+            let aScheme = a.scheme,
+            let bScheme = b.scheme,
+            allowedSchemes.contains(aScheme),
+            allowedSchemes.contains(bScheme)
+            else {
+                fatalError("Unrecognized scheme.")
+        }
+        guard aScheme == bScheme else { return false }
+        
+        guard a.host == b.host, a.path == b.path else { return false }
+        
+        if a.query == nil && b.query == nil { return true }
+        
+        let aQuerySet = Set(a.query!.split(separator: "&"))
+        let bQuerySet = Set(b.query!.split(separator: "&"))
+        
+        return aQuerySet == bQuerySet
     }
     
 }

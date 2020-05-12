@@ -1,0 +1,20 @@
+{ "sizes": { "canblog": 0, "canprint": 0, "candownload": 1,
+"size": [
+  { "label": "Square", "width": 75, "height": 75, "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_s.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/sq\/", "media": "photo" },
+  { "label": "Large Square", "width": "150", "height": "150", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_q.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/q\/", "media": "photo" },
+  { "label": "Thumbnail", "width": 100, "height": 67, "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_t.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/t\/", "media": "photo" },
+  { "label": "Small", "width": "240", "height": "160", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_m.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/s\/", "media": "photo" },
+  { "label": "Small 320", "width": "320", "height": "213", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_n.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/n\/", "media": "photo" },
+  { "label": "Small 400", "width": "400", "height": "267", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_w.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/w\/", "media": "photo" },
+  { "label": "Medium", "width": "500", "height": "333", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/m\/", "media": "photo" },
+  { "label": "Medium 640", "width": "640", "height": "427", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_z.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/z\/", "media": "photo" },
+  { "label": "Medium 800", "width": "800", "height": "533", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_c.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/c\/", "media": "photo" },
+  { "label": "Large", "width": "1024", "height": "683", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_de74edfbca_b.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/l\/", "media": "photo" },
+  { "label": "Large 1600", "width": "1600", "height": "1067", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_1975ad679f_h.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/h\/", "media": "photo" },
+  { "label": "Large 2048", "width": "2048", "height": "1365", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_48071edd9c_k.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/k\/", "media": "photo" },
+  { "label": "X-Large 3K", "width": "3072", "height": "2048", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_7f2a6f3027_3k.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/3k\/", "media": "photo" },
+  { "label": "X-Large 4K", "width": "4096", "height": "2731", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_a484aa114a_4k.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/4k\/", "media": "photo" },
+  { "label": "X-Large 5K", "width": "5120", "height": "3413", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_44331493d8_5k.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/5k\/", "media": "photo" },
+  { "label": "X-Large 6K", "width": "6144", "height": "4096", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_12f4c37012_6k.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/6k\/", "media": "photo" },
+  { "label": "Original", "width": "6720", "height": "4480", "source": "https:\/\/live.staticflickr.com\/65535\/49872151696_982e4b423f_o.jpg", "url": "https:\/\/www.flickr.com\/photos\/rpealit\/49872151696\/sizes\/o\/", "media": "photo" }
+] }, "stat": "ok" }

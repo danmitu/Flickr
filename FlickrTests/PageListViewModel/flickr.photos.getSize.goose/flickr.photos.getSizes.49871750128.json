@@ -1,0 +1,14 @@
+{ "sizes": { "canblog": 0, "canprint": 0, "candownload": 0,
+"size": [
+  { "label": "Square", "width": 75, "height": 75, "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_s.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/sq\/", "media": "photo" },
+  { "label": "Large Square", "width": "150", "height": "150", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_q.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/q\/", "media": "photo" },
+  { "label": "Thumbnail", "width": 100, "height": 67, "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_t.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/t\/", "media": "photo" },
+  { "label": "Small", "width": "240", "height": "160", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_m.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/s\/", "media": "photo" },
+  { "label": "Small 320", "width": "320", "height": "213", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_n.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/n\/", "media": "photo" },
+  { "label": "Small 400", "width": "400", "height": "267", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_w.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/w\/", "media": "photo" },
+  { "label": "Medium", "width": "500", "height": "333", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/m\/", "media": "photo" },
+  { "label": "Medium 640", "width": "640", "height": "427", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_z.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/z\/", "media": "photo" },
+  { "label": "Medium 800", "width": "800", "height": "533", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_c.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/c\/", "media": "photo" },
+  { "label": "Large", "width": "1024", "height": "683", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_745f67295f_b.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/l\/", "media": "photo" },
+  { "label": "Large 1600", "width": "1600", "height": "1067", "source": "https:\/\/live.staticflickr.com\/65535\/49871750128_2d382777c2_h.jpg", "url": "https:\/\/www.flickr.com\/photos\/70363861@N00\/49871750128\/sizes\/h\/", "media": "photo" }
+] }, "stat": "ok" }
