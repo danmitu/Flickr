@@ -191,7 +191,7 @@
 			children = (
 				920387902465294A00ECFCCD /* Error.swift */,
 				92038788246519A300ECFCCD /* PagedListViewModel.swift */,
-				92B19FF4246A4C37003F3437 /* SearchViewModel.swift */,
+				92D41073246B9BE30071778A /* Search Tab */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -255,6 +255,14 @@
 				9274199424650C5E002981DD /* Info.plist */,
 			);
 			path = FlickrUITests;
+			sourceTree = "<group>";
+		};
+		92D41073246B9BE30071778A /* Search Tab */ = {
+			isa = PBXGroup;
+			children = (
+				92B19FF4246A4C37003F3437 /* SearchViewModel.swift */,
+			);
+			path = "Search Tab";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
