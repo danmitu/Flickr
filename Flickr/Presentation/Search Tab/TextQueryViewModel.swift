@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchViewModel {
+class TextQueryViewModel {
 
     /**
      This class is mostly just a wrapper around `PagedListViewModel`.
