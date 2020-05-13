@@ -10,8 +10,9 @@ import Foundation
 import os.log
 
 extension Error {
-        
+    
     func log() {
+        guard shouldLog else { return }
         switch self {
         case let flickrError as FlickrError:
             os_log("Flickr API Error code: %{PUBLIC}@", log: OSLog.network, type: .default, flickrError.code)
@@ -20,19 +21,32 @@ extension Error {
         }
     }
     
+    private var shouldLog: Bool {
+        // By default, I log the errors but there are some I do not care about.
+        switch self {
+        case let nsError as NSError:
+            switch nsError.code {
+            case NSURLErrorCancelled: return false
+            default: break
+            }
+        default: break
+        }
+        return true
+    }
+    
     // This is what I see.
     var debugDescription: String {
         switch self {
-            case let error as FlickrError:
-                return "Flickr API Error: (\(error.code)) \(error.message)"
-            case is NoDataError:
-                return "No Data Error"
-            case let wrongStatusCodeError as WrongStatusCodeError:
-                return "Wrong Status Code Error: (\(wrongStatusCodeError.statusCode))."
-            case let oldError as NSError:
-                return oldError.debugDescription
-            default:
-                return "Unkown Error"
+        case let error as FlickrError:
+            return "Flickr API Error: (\(error.code)) \(error.message)"
+        case is NoDataError:
+            return "No Data Error"
+        case let wrongStatusCodeError as WrongStatusCodeError:
+            return "Wrong Status Code Error: (\(wrongStatusCodeError.statusCode))."
+        case let nsError as NSError:
+            return nsError.debugDescription
+        default:
+            return "Unkown Error"
         }
     }
     
@@ -40,5 +54,5 @@ extension Error {
     var description: String {
         return "There was an error."
     }
-
+    
 }
