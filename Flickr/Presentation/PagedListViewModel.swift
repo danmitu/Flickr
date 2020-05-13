@@ -10,8 +10,8 @@ import Foundation
 
 class PagedListViewModel {
         
-    private var photos = [ImageInfo]()
-    private var sizes = [Identifier : ImageSizeInfo]()
+    private var photos = [FlickrList.Page.Image]()
+    private var sizes = [Identifier : FlickrSizesInfo]()
     private(set) var currentPage = 1
     private var numberPages: Int!
     private var totalImages: Int!
@@ -49,22 +49,22 @@ class PagedListViewModel {
         identfiers.removeAll()
     }
         
-    private func update(imageList: ImageList, sizeDict: [Identifier : ImageSizeInfo]) {
+    private func update(imageList: FlickrList, sizeDict: [Identifier : FlickrSizesInfo]) {
         photos.append(contentsOf: imageList.page.array)
         sizes.merge(dict: sizeDict)
-        currentPage = imageList.page.page
+        currentPage = imageList.page.pageNumber
         numberPages = imageList.page.pages
         totalImages = imageList.page.total
     }
     
     /// Erase any previous image list and load the new one. Completes with a list of the new photo identifiers.
-    func load(_ endpoint: Endpoint<ImageList>) {
+    func load(_ endpoint: Endpoint<FlickrList>) {
         reset()
         sharedLoad(endpoint: endpoint)
     }
     
     /// Load an image list, appending the results to existing results. Completes with a list of the newly added photo identifiers.
-    func append(_ endpoint: Endpoint<ImageList>) {
+    func append(_ endpoint: Endpoint<FlickrList>) {
         sharedLoad(endpoint: endpoint)
     }
 
@@ -76,7 +76,7 @@ class PagedListViewModel {
      - endpoint: Endpoint to retrieve.
      - onComplete: Receives a result containing the identifeirs for the newly loaded photos.
      */
-    private func sharedLoad(endpoint: Endpoint<ImageList>) {
+    private func sharedLoad(endpoint: Endpoint<FlickrList>) {
         guard !atLastPage else { return }
         guard !isLoadingNextPage else { return }
         isLoadingNextPage = true
@@ -89,7 +89,7 @@ class PagedListViewModel {
             case let .success(imageList):
                 let flickr = Flickr()
                 let zip = DispatchGroup() /// Retrieve `ImageSizeInfo` for each photo in the image list.
-                var sizeDict = [Identifier:ImageSizeInfo]()
+                var sizeDict = [Identifier:FlickrSizesInfo]()
                 let pageIdentifiers = Set(imageList.page.array.map { $0.id })
                 let newUniqueIdentifiers = pageIdentifiers.subtracting(this.identfiers)
                 newUniqueIdentifiers.forEach { id in

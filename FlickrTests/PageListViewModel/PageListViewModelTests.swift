@@ -34,11 +34,11 @@ class PageListViewModelTests: XCTestCase {
         precondition(fm.fileExists(atPath: searchFolderURL.path))
         precondition(fm.fileExists(atPath: sizesFolderURL.path))
 
-        let imageListSamples: [ImageList] = decodeTestCases(folder: searchFolderURL).sorted(by: {
-            $0.page.page < $1.page.page
+        let imageListSamples: [FlickrList] = decodeTestCases(folder: searchFolderURL).sorted(by: {
+            $0.page.pageNumber < $1.page.pageNumber
         })
         
-        var imageListEndpoints = [Endpoint<ImageList>]()
+        var imageListEndpoints = [Endpoint<FlickrList>]()
         
         var mockResults = [MockResult]()
         
@@ -58,7 +58,7 @@ class PageListViewModelTests: XCTestCase {
             for image in imageList.page.array {
                 let imageSizeFilename = "flickr.photos.getSizes.\(image.id)"
                 let imageSizeURL = sizesFolderURL.appendingPathComponent(imageSizeFilename).appendingPathExtension("json")
-                let imageSizeInfo: ImageSizeInfo = json(at: imageSizeURL.path)
+                let imageSizeInfo: FlickrSizesInfo = json(at: imageSizeURL.path)
                 let imageSizeEndpoint = flickr.getSizes(photoId: image.id)
                 let imageSizeMockResult = MockResult(endpoint: imageSizeEndpoint, result: .success(imageSizeInfo))
                 mockResults.append(imageSizeMockResult)

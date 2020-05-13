@@ -16,7 +16,7 @@ struct Flickr {
         return propertyList("APIKeys", bundle: Bundle.main)["Flickr"] as! String
     }()
 
-    func search(text: String, page: Int, perPage: Int) -> Endpoint<ImageList> {
+    func search(text: String, page: Int, perPage: Int) -> Endpoint<FlickrList> {
         
         let query: [String:String] = [
             "method":"flickr.photos.search",
@@ -29,7 +29,7 @@ struct Flickr {
             "per_page":"\(perPage)"
         ]
         
-        return Endpoint<ImageList>(
+        return Endpoint<FlickrList>(
             json: .get,
             url: Flickr.baseURL,
             accept: ContentType.json,
@@ -38,7 +38,7 @@ struct Flickr {
             query: query)
     }
 
-    func getSizes(photoId: String) -> Endpoint<ImageSizeInfo> {
+    func getSizes(photoId: String) -> Endpoint<FlickrSizesInfo> {
         
         let query = [
             "method":"flickr.photos.getSizes",
@@ -48,7 +48,7 @@ struct Flickr {
             "format":"json",
         ]
         
-        return Endpoint<ImageSizeInfo>(
+        return Endpoint<FlickrSizesInfo>(
             json: .get,
             url: Flickr.baseURL,
             accept: ContentType.json,
@@ -58,7 +58,7 @@ struct Flickr {
         )
     }
     
-    func interesting(page: Int, perPage: Int) -> Endpoint<ImageList> {
+    func interesting(page: Int, perPage: Int) -> Endpoint<FlickrList> {
         let query: [String:String] = [
             "method":"flickr.interestingness.getList",
             "api_key":Flickr.apiKey,
@@ -68,7 +68,7 @@ struct Flickr {
             "per_page":"50"
         ]
 
-        return Endpoint<ImageList>(
+        return Endpoint<FlickrList>(
             json: .get,
             url: Flickr.baseURL,
             accept: ContentType.json,
