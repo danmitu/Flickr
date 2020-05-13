@@ -22,3 +22,24 @@ extension UIViewController {
     }
 
 }
+
+/// For adding and removing child view controllers.
+@nonobjc extension UIViewController {
+    func add(child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+
+    func removeChild() {
+        // Just to be safe, we check that this view controller
+        // is actually added to a parent before removing it.
+        guard parent != nil else {
+            return
+        }
+
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
+    }
+}
