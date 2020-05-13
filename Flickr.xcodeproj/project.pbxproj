@@ -70,6 +70,9 @@
 		92B19FF5246A4C37003F3437 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* SearchViewModel.swift */; };
 		92B19FF6246A4C37003F3437 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* SearchViewModel.swift */; };
 		92B19FF7246A4C37003F3437 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* SearchViewModel.swift */; };
+		92D41075246B9E4C0071778A /* InterestingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41074246B9E4C0071778A /* InterestingViewModel.swift */; };
+		92D41076246B9E4C0071778A /* InterestingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41074246B9E4C0071778A /* InterestingViewModel.swift */; };
+		92D41077246B9E4C0071778A /* InterestingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41074246B9E4C0071778A /* InterestingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +124,7 @@
 		9274199424650C5E002981DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92B19FF0246A4B7E003F3437 /* OSLog+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+.swift"; sourceTree = "<group>"; };
 		92B19FF4246A4C37003F3437 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		92D41074246B9E4C0071778A /* InterestingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				92B19FF4246A4C37003F3437 /* SearchViewModel.swift */,
+				92D41074246B9E4C0071778A /* InterestingViewModel.swift */,
 			);
 			path = "Search Tab";
 			sourceTree = "<group>";
@@ -419,6 +424,7 @@
 				92B19FF5246A4C37003F3437 /* SearchViewModel.swift in Sources */,
 				920387912465294A00ECFCCD /* Error.swift in Sources */,
 				920387612465149200ECFCCD /* ImageList.swift in Sources */,
+				92D41075246B9E4C0071778A /* InterestingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +434,7 @@
 			files = (
 				920387922465294A00ECFCCD /* Error.swift in Sources */,
 				9203876E2465154000ECFCCD /* TestSession.swift in Sources */,
+				92D41076246B9E4C0071778A /* InterestingViewModel.swift in Sources */,
 				9203876D2465154000ECFCCD /* Session.swift in Sources */,
 				92038766246514F000ECFCCD /* ImageSizeInfo.swift in Sources */,
 				920387742465154D00ECFCCD /* Utility.swift in Sources */,
@@ -470,6 +477,7 @@
 				92B19FF7246A4C37003F3437 /* SearchViewModel.swift in Sources */,
 				920387932465294A00ECFCCD /* Error.swift in Sources */,
 				9203876B246514F000ECFCCD /* FlickrError.swift in Sources */,
+				92D41077246B9E4C0071778A /* InterestingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

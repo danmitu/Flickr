@@ -58,4 +58,24 @@ struct Flickr {
         )
     }
     
+    func interesting(page: Int, perPage: Int) -> Endpoint<ImageList> {
+        let query: [String:String] = [
+            "method":"flickr.interestingness.getList",
+            "api_key":Flickr.apiKey,
+            "nojsoncallback":"1",
+            "format":"json",
+            "page":"\(page)",
+            "per_page":"50"
+        ]
+
+        return Endpoint<ImageList>(
+            json: .get,
+            url: Flickr.baseURL,
+            accept: ContentType.json,
+            headers: [:],
+            expectedStatusCode: expected200to300,
+            query: query)
+    }
+
+    
 }
