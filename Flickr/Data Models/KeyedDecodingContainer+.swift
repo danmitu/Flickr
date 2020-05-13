@@ -8,6 +8,8 @@
 
 import Foundation
 
+// I've done this because Flickr's API responses aren't consistent in their typing.
+
 extension KeyedDecodingContainer {
     
     /// Decodes an `Int` into a `Bool` where even is `false` and odd is `true`.

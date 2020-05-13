@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
 
+    /// Presents an alert using it's description as the message with an "OK" action.
     func presentErrorAlert(_ error: Error, onConfirmation: (()->Void)? = nil) {
         let alertController = UIAlertController(title: "Error",
                                                 message: error.description,
