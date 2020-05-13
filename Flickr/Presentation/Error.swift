@@ -10,7 +10,17 @@ import Foundation
 import os.log
 
 extension Error {
+        
+    func log() {
+        switch self {
+        case let flickrError as FlickrError:
+            os_log("Flickr API Error code: %{PUBLIC}@", log: OSLog.network, type: .default, flickrError.code)
+        default:
+            os_log("%{PUBLIC}@", log: OSLog.network, type: .default, debugDescription)
+        }
+    }
     
+    // This is what I see.
     var debugDescription: String {
         switch self {
             case let error as FlickrError:
@@ -26,15 +36,7 @@ extension Error {
         }
     }
     
-    func log() {
-        switch self {
-        case let flickrError as FlickrError:
-            os_log("Flickr API Error code: %{PUBLIC}@", log: OSLog.network, type: .default, flickrError.code)
-        default:
-            os_log("%{PUBLIC}@", log: OSLog.network, type: .default, debugDescription)
-        }
-    }
-
+    // This is what users see. In the future, it may be more descriptive.
     var description: String {
         return "There was an error."
     }
