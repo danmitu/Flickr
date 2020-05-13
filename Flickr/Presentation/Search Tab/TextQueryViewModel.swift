@@ -52,7 +52,7 @@ class TextQueryViewModel {
         pagedList.load(endpoint)
     }
     
-    func nextPage() {
+    func loadNextPage() {
         guard atLastPage == false, let query = query else { return }
         let endpoint = flickr.search(text: query, page: pagedList.currentPage + 1, perPage: perPage)
         pagedList.append(endpoint)

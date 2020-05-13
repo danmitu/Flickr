@@ -1,18 +1,25 @@
 //
-//  InterestingViewController.swift
+//  TextQueryViewController.swift
 //  Flickr
 //
-//  Created by Dan Mitu on 5/12/20.
+//  Created by Dan Mitu on 5/13/20.
 //  Copyright © 2020 Dan Mitu. All rights reserved.
 //
 
 import UIKit
 
-class InterestingViewController: UICollectionViewController, JustifiedLayoutDelegate {
-
+class TextQueryViewController: UICollectionViewController, JustifiedLayoutDelegate {
+    
+    var textQuery: String? {
+        didSet {
+            guard let textQuery = textQuery else { reset(); return }
+            viewModel.search(query: textQuery)
+        }
+    }
+    
     // MARK: - View Model
     
-    private let viewModel = InterestingViewModel()
+    private let viewModel = TextQueryViewModel()
     
     // MARK: - Diffable Data Source
     
@@ -34,6 +41,13 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
         return cell
     }
     
+    private func reset() {
+        viewModel.reset()
+        var snapshot = Snapshot()
+        if snapshot.numberOfSections == 0 { snapshot.appendSections([.main]) }
+        dataSource.apply(snapshot)
+    }
+    
     private func apply(newItems items: [Item]) {
         var snapshot = dataSource.snapshot()
         if snapshot.numberOfSections == 0 { snapshot.appendSections([.main]) }
@@ -51,7 +65,6 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
         guard count > 0 else { return nil }
         return IndexPath(item: count - 1, section: 0)
     }
-
     
     private func shouldLoadNextPage(given indexPath: IndexPath) -> Bool {
         return indexPath == lastIndex && indexPath != firstIndex
@@ -95,7 +108,6 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
         
         // Final Actions
         startAnimatingActivityIndicator()
-        viewModel.loadNextPage()
     }
 
     // MARK: - Activity Indicator
@@ -116,5 +128,5 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
     func collectionView(_ collectionView: UICollectionView, layout: JustifiedLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(size: viewModel.size(at: indexPath.item))
     }
-        
+            
 }

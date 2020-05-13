@@ -10,13 +10,15 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
-    @TrimmedString private var searchQuery: String = "" {
+    @OptionalTrimmedString private var searchBarInput: String? {
         didSet {
-            print("Time to display the search results.")
+            searchResultsViewController.textQuery = searchBarInput
         }
     }
     
-    private let searchController = UISearchController()
+    private lazy var searchController = UISearchController(searchResultsController: searchResultsViewController)
+    
+    private let searchResultsViewController = TextQueryViewController()
     
     // Could easily be made reuseable, but for now I'll default to Interesting.
     private let defaultContentViewController: UIViewController = InterestingViewController()
@@ -34,12 +36,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     // MARK: - UISearchBarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("tapped cancel")
+        searchBarInput = nil
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchQuery = searchBar.text ?? ""
-        print(searchQuery)
+        searchBarInput = searchBar.text ?? ""
     }
 
     
