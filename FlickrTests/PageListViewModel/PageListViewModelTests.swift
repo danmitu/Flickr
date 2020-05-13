@@ -102,7 +102,7 @@ class PageListViewModelTests: XCTestCase {
         wait(for: [thirdPageExpectation], timeout: 2)
         
         (0..<viewModel.numberOfItems).forEach {
-            XCTAssertNotNil(viewModel.size(at: $0 ))
+            let _ = viewModel.size(at: $0)
         }
         
         viewModel.reset()

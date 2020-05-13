@@ -73,6 +73,24 @@
 		92D41075246B9E4C0071778A /* InterestingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41074246B9E4C0071778A /* InterestingViewModel.swift */; };
 		92D41076246B9E4C0071778A /* InterestingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41074246B9E4C0071778A /* InterestingViewModel.swift */; };
 		92D41077246B9E4C0071778A /* InterestingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41074246B9E4C0071778A /* InterestingViewModel.swift */; };
+		92D41079246BA22C0071778A /* InterestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41078246BA22C0071778A /* InterestingViewController.swift */; };
+		92D4107A246BA22C0071778A /* InterestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41078246BA22C0071778A /* InterestingViewController.swift */; };
+		92D4107B246BA22C0071778A /* InterestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41078246BA22C0071778A /* InterestingViewController.swift */; };
+		92D4107D246BA2660071778A /* JustifiedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4107C246BA2660071778A /* JustifiedLayout.swift */; };
+		92D4107E246BA2660071778A /* JustifiedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4107C246BA2660071778A /* JustifiedLayout.swift */; };
+		92D4107F246BA2660071778A /* JustifiedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4107C246BA2660071778A /* JustifiedLayout.swift */; };
+		92D41081246BA3DB0071778A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41080246BA3DB0071778A /* UIView+.swift */; };
+		92D41082246BA3DB0071778A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41080246BA3DB0071778A /* UIView+.swift */; };
+		92D41083246BA3DB0071778A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41080246BA3DB0071778A /* UIView+.swift */; };
+		92D41085246BA5DF0071778A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41084246BA5DF0071778A /* UIViewController+.swift */; };
+		92D41086246BA5DF0071778A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41084246BA5DF0071778A /* UIViewController+.swift */; };
+		92D41087246BA5DF0071778A /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41084246BA5DF0071778A /* UIViewController+.swift */; };
+		92D41089246BB1B20071778A /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41088246BB1B20071778A /* CGSize+.swift */; };
+		92D4108A246BB1B20071778A /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41088246BB1B20071778A /* CGSize+.swift */; };
+		92D4108B246BB1B20071778A /* CGSize+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41088246BB1B20071778A /* CGSize+.swift */; };
+		92D4108D246BB2630071778A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */; };
+		92D4108E246BB2630071778A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */; };
+		92D4108F246BB2630071778A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +143,12 @@
 		92B19FF0246A4B7E003F3437 /* OSLog+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+.swift"; sourceTree = "<group>"; };
 		92B19FF4246A4C37003F3437 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		92D41074246B9E4C0071778A /* InterestingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingViewModel.swift; sourceTree = "<group>"; };
+		92D41078246BA22C0071778A /* InterestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestingViewController.swift; sourceTree = "<group>"; };
+		92D4107C246BA2660071778A /* JustifiedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustifiedLayout.swift; sourceTree = "<group>"; };
+		92D41080246BA3DB0071778A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		92D41084246BA5DF0071778A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		92D41088246BB1B20071778A /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
+		92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +219,10 @@
 			children = (
 				920387902465294A00ECFCCD /* Error.swift */,
 				92038788246519A300ECFCCD /* PagedListViewModel.swift */,
+				92D41080246BA3DB0071778A /* UIView+.swift */,
+				92D41084246BA5DF0071778A /* UIViewController+.swift */,
+				92D41088246BB1B20071778A /* CGSize+.swift */,
+				92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */,
 				92D41073246B9BE30071778A /* Search Tab */,
 			);
 			path = Presentation;
@@ -266,6 +294,8 @@
 			children = (
 				92B19FF4246A4C37003F3437 /* SearchViewModel.swift */,
 				92D41074246B9E4C0071778A /* InterestingViewModel.swift */,
+				92D41078246BA22C0071778A /* InterestingViewController.swift */,
+				92D4107C246BA2660071778A /* JustifiedLayout.swift */,
 			);
 			path = "Search Tab";
 			sourceTree = "<group>";
@@ -415,15 +445,21 @@
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
 				92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92038763246514D700ECFCCD /* ImageSizeInfo.swift in Sources */,
+				92D41085246BA5DF0071778A /* UIViewController+.swift in Sources */,
 				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
+				92D41081246BA3DB0071778A /* UIView+.swift in Sources */,
+				92D4107D246BA2660071778A /* JustifiedLayout.swift in Sources */,
 				920387522465104900ECFCCD /* TestSession.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
 				92038785246518EB00ECFCCD /* Flickr.swift in Sources */,
 				924709E52465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				92038789246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
 				92B19FF5246A4C37003F3437 /* SearchViewModel.swift in Sources */,
+				92D4108D246BB2630071778A /* ImageCollectionViewCell.swift in Sources */,
 				920387912465294A00ECFCCD /* Error.swift in Sources */,
+				92D41079246BA22C0071778A /* InterestingViewController.swift in Sources */,
 				920387612465149200ECFCCD /* ImageList.swift in Sources */,
+				92D41089246BB1B20071778A /* CGSize+.swift in Sources */,
 				92D41075246B9E4C0071778A /* InterestingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,15 +480,21 @@
 				920387822465189700ECFCCD /* ViewController.swift in Sources */,
 				9203878E24651E7C00ECFCCD /* Flickr.swift in Sources */,
 				920387732465154D00ECFCCD /* SceneDelegate.swift in Sources */,
+				92D41082246BA3DB0071778A /* UIView+.swift in Sources */,
 				9274198824650C5E002981DD /* FlickrTests.swift in Sources */,
 				924709E62465EA9400EC9F9E /* Dictionary+.swift in Sources */,
+				92D4108E246BB2630071778A /* ImageCollectionViewCell.swift in Sources */,
 				92038764246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876C2465154000ECFCCD /* Endpoint.swift in Sources */,
+				92D41086246BA5DF0071778A /* UIViewController+.swift in Sources */,
 				92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				9203878D24651E2500ECFCCD /* PageListViewModelTests.swift in Sources */,
 				9203878A246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
+				92D4107E246BA2660071778A /* JustifiedLayout.swift in Sources */,
+				92D4108A246BB1B20071778A /* CGSize+.swift in Sources */,
 				9203879824653F7C00ECFCCD /* FlickrUITests.swift in Sources */,
 				92038767246514F000ECFCCD /* FlickrError.swift in Sources */,
+				92D4107A246BA22C0071778A /* InterestingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,15 +510,21 @@
 				92038769246514F000ECFCCD /* ImageList.swift in Sources */,
 				92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				920387832465189800ECFCCD /* ViewController.swift in Sources */,
+				92D41087246BA5DF0071778A /* UIViewController+.swift in Sources */,
 				920387762465154D00ECFCCD /* SceneDelegate.swift in Sources */,
+				92D41083246BA3DB0071778A /* UIView+.swift in Sources */,
+				92D4107F246BA2660071778A /* JustifiedLayout.swift in Sources */,
 				92038768246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876F2465154100ECFCCD /* Endpoint.swift in Sources */,
 				9203878B246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
 				924709E72465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				9203878F24651E7D00ECFCCD /* Flickr.swift in Sources */,
 				92B19FF7246A4C37003F3437 /* SearchViewModel.swift in Sources */,
+				92D4108F246BB2630071778A /* ImageCollectionViewCell.swift in Sources */,
 				920387932465294A00ECFCCD /* Error.swift in Sources */,
+				92D4107B246BA22C0071778A /* InterestingViewController.swift in Sources */,
 				9203876B246514F000ECFCCD /* FlickrError.swift in Sources */,
+				92D4108B246BB1B20071778A /* CGSize+.swift in Sources */,
 				92D41077246B9E4C0071778A /* InterestingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -42,14 +42,14 @@ class InterestingViewModel {
         pagedList.reset()
     }
     
-    func load(query: String) {
+    func load() {
         reset()
         let endpoint = flickr.interesting(page: 0, perPage: perPage)
         pagedList.load(endpoint)
 
     }
         
-    func nextPage() {
+    func loadNextPage() {
         guard atLastPage == false else { return }
         let endpoint = flickr.interesting(page: pagedList.currentPage + 1, perPage: perPage)
         pagedList.append(endpoint)

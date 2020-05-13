@@ -16,11 +16,11 @@ class PagedListViewModel {
     private var numberPages: Int!
     private var totalImages: Int!
     private var isLoadingNextPage = false
+    private(set) var identfiers = Set<Identifier>()
     
     var nextPageLoaded: (([Identifier])->Void)?
     
     var errorOccurred: ((Error)->Void)?
-
     
     var atLastPage: Bool {
         guard let numberPages = numberPages else { return false }
@@ -46,6 +46,7 @@ class PagedListViewModel {
         numberPages = nil
         totalImages = nil
         isLoadingNextPage = false
+        identfiers.removeAll()
     }
         
     private func update(imageList: ImageList, sizeDict: [Identifier : ImageSizeInfo]) {
@@ -89,23 +90,25 @@ class PagedListViewModel {
                 let flickr = Flickr()
                 let zip = DispatchGroup() /// Retrieve `ImageSizeInfo` for each photo in the image list.
                 var sizeDict = [Identifier:ImageSizeInfo]()
-                imageList.page.array.forEach { photo in
+                let pageIdentifiers = Set(imageList.page.array.map { $0.id })
+                let newUniqueIdentifiers = pageIdentifiers.subtracting(this.identfiers)
+                newUniqueIdentifiers.forEach { id in
                     zip.enter()
-                    let sizeEndpoint = flickr.getSizes(photoId: photo.id)
+                    let sizeEndpoint = flickr.getSizes(photoId: id)
+                    this.identfiers.insert(id)
                     Environment.env.session.download(sizeEndpoint) { sizeInfoResult in
                         defer { zip.leave() }
                         switch sizeInfoResult {
                         case let .failure(error):
                             error.log() // We just log the error because this doesn't break anything too serious.
                         case let .success(imageSize):
-                            sizeDict[photo.id] = imageSize
+                            sizeDict[id] = imageSize
                         }
                     }
                 }
                 zip.notify(queue: .main) {
                     this.update(imageList: imageList, sizeDict: sizeDict)
-                    let identifiers = imageList.page.array.map { $0.id }
-                    this.nextPageLoaded?(identifiers)
+                    this.nextPageLoaded?(Array(newUniqueIdentifiers))
                 }
             }
         }
