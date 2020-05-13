@@ -88,6 +88,12 @@
 		92D4108D246BB2630071778A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */; };
 		92D4108E246BB2630071778A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */; };
 		92D4108F246BB2630071778A /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */; };
+		92D41092246BD21D0071778A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41091246BD21D0071778A /* ImageLoader.swift */; };
+		92D41093246BD21D0071778A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41091246BD21D0071778A /* ImageLoader.swift */; };
+		92D41094246BD21D0071778A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41091246BD21D0071778A /* ImageLoader.swift */; };
+		92D41096246BD22E0071778A /* SingleImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41095246BD22E0071778A /* SingleImageLoader.swift */; };
+		92D41097246BD22E0071778A /* SingleImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41095246BD22E0071778A /* SingleImageLoader.swift */; };
+		92D41098246BD22E0071778A /* SingleImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D41095246BD22E0071778A /* SingleImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +151,8 @@
 		92D41084246BA5DF0071778A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		92D41088246BB1B20071778A /* CGSize+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+.swift"; sourceTree = "<group>"; };
 		92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		92D41091246BD21D0071778A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		92D41095246BD22E0071778A /* SingleImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +227,7 @@
 				92D41084246BA5DF0071778A /* UIViewController+.swift */,
 				92D41088246BB1B20071778A /* CGSize+.swift */,
 				92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */,
+				92D41090246BD2000071778A /* Image Loading */,
 				92D41073246B9BE30071778A /* Search Tab */,
 			);
 			path = Presentation;
@@ -293,6 +302,15 @@
 				92D4107C246BA2660071778A /* JustifiedLayout.swift */,
 			);
 			path = "Search Tab";
+			sourceTree = "<group>";
+		};
+		92D41090246BD2000071778A /* Image Loading */ = {
+			isa = PBXGroup;
+			children = (
+				92D41091246BD21D0071778A /* ImageLoader.swift */,
+				92D41095246BD22E0071778A /* SingleImageLoader.swift */,
+			);
+			path = "Image Loading";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +455,7 @@
 				9203875F2465144D00ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				920387502465102200ECFCCD /* Session.swift in Sources */,
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
+				92D41096246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92038763246514D700ECFCCD /* ImageSizeInfo.swift in Sources */,
 				92D41085246BA5DF0071778A /* UIViewController+.swift in Sources */,
@@ -446,6 +465,7 @@
 				920387522465104900ECFCCD /* TestSession.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
 				92038785246518EB00ECFCCD /* Flickr.swift in Sources */,
+				92D41092246BD21D0071778A /* ImageLoader.swift in Sources */,
 				924709E52465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				92038789246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
 				92B19FF5246A4C37003F3437 /* SearchViewModel.swift in Sources */,
@@ -467,6 +487,7 @@
 				92D41076246B9E4C0071778A /* InterestingViewModel.swift in Sources */,
 				9203876D2465154000ECFCCD /* Session.swift in Sources */,
 				92038766246514F000ECFCCD /* ImageSizeInfo.swift in Sources */,
+				92D41093246BD21D0071778A /* ImageLoader.swift in Sources */,
 				920387742465154D00ECFCCD /* Utility.swift in Sources */,
 				920387722465154D00ECFCCD /* AppDelegate.swift in Sources */,
 				92B19FF6246A4C37003F3437 /* SearchViewModel.swift in Sources */,
@@ -487,6 +508,7 @@
 				92D4108A246BB1B20071778A /* CGSize+.swift in Sources */,
 				9203879824653F7C00ECFCCD /* FlickrUITests.swift in Sources */,
 				92038767246514F000ECFCCD /* FlickrError.swift in Sources */,
+				92D41097246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92D4107A246BA22C0071778A /* InterestingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +522,7 @@
 				9203876A246514F000ECFCCD /* ImageSizeInfo.swift in Sources */,
 				920387772465154D00ECFCCD /* Utility.swift in Sources */,
 				920387752465154D00ECFCCD /* AppDelegate.swift in Sources */,
+				92D41098246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92038769246514F000ECFCCD /* ImageList.swift in Sources */,
 				92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92D41087246BA5DF0071778A /* UIViewController+.swift in Sources */,
@@ -509,6 +532,7 @@
 				92038768246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876F2465154100ECFCCD /* Endpoint.swift in Sources */,
 				9203878B246519A300ECFCCD /* PagedListViewModel.swift in Sources */,
+				92D41094246BD21D0071778A /* ImageLoader.swift in Sources */,
 				924709E72465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				9203878F24651E7D00ECFCCD /* Flickr.swift in Sources */,
 				92B19FF7246A4C37003F3437 /* SearchViewModel.swift in Sources */,

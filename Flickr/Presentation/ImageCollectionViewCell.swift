@@ -43,7 +43,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         imageView.image = nil
-        // TODO: Cancel image load here.
+        imageView.cancelImageLoad()
     }
     
 }

@@ -31,7 +31,8 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
             this.viewModel.loadNextPage()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
-        // TODO: Load image for cell here.
+        let url = this.viewModel.url(at: indexPath.item)
+        cell.imageView.loadImage(at: url)
         return cell
     }
     
