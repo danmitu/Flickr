@@ -14,14 +14,16 @@ struct Environment {
 
 protocol Session {
     
-    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>)->())
+    @discardableResult
+    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>)->()) -> URLSessionTask!
     
 }
 
 extension URLSession: Session {
     
-    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) {
-        load(endpoint, onComplete: onComplete)
+    @discardableResult
+    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) -> URLSessionTask!{
+        return load(endpoint, onComplete: onComplete)
     }
     
 }

@@ -38,7 +38,8 @@ class TestSession: Session {
     }
     
     /// Removes the `MockResult` every time it's found.
-    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) {
+    @discardableResult
+    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) -> URLSessionTask! {
         /// Searches the mock responses for an endpoint match. Make sure it's the right type too.
         guard let index = mockResults.firstIndex(where: {
             let match = urlsMatch($0.endpoint.request.url!, b: endpoint.request.url!)
@@ -58,6 +59,7 @@ class TestSession: Session {
             mockResults.remove(at: index)
             onComplete(.failure(e))
         }
+        return nil
     }
     
     /// Verifies that there are no remaining mock results. Returns true if successful.
