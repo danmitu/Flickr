@@ -9,19 +9,16 @@
 import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
-    
-    @OptionalTrimmedString private var searchBarInput: String? {
-        didSet {
-            searchResultsViewController.textQuery = searchBarInput
-        }
-    }
-    
+  
     private lazy var searchController = UISearchController(searchResultsController: searchResultsViewController)
+
+    private let searchResultsViewController = TextResultsViewController()
     
-    private let searchResultsViewController = TextQueryViewController()
-    
-    // Could easily be made reuseable, but for now I'll default to Interesting.
-    private let defaultContentViewController: UIViewController = InterestingViewController()
+    private let defaultContentViewController: ImageListViewController = {
+        let viewModel = ImageListViewModel()
+        viewModel.endpointSource = { Flickr().interesting(page: $0, perPage: 30) }
+        return ImageListViewController(viewModel: viewModel)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +30,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         navigationItem.searchController = searchController
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        defaultContentViewController.startLoadingPages()
+    }
+    
     // MARK: - UISearchBarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBarInput = nil
+        searchResultsViewController.textQuery = nil
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBarInput = searchBar.text ?? ""
+        searchResultsViewController.textQuery = searchBar.text ?? ""
     }
 
     

@@ -1,26 +1,66 @@
 //
-//  PageListViewModelTests.swift
+//  ImageListViewModelTests.swift
 //  FlickrTests
 //
-//  Created by Dan Mitu on 5/7/20.
+//  Created by Dan Mitu on 5/14/20.
 //  Copyright © 2020 Dan Mitu. All rights reserved.
 //
 
-import UIKit
 import XCTest
-@testable import Flickr
 
-class PageListViewModelTests: XCTestCase {
-
+class ImageListViewModelTests: XCTestCase {
+    
     let flickr = Flickr()
         
-    var viewModel = PagedListViewModel()
+    private func testHappyPath() {
+
+        let viewModel = ImageListViewModel()
+        viewModel.endpointSource = { self.flickr.search(text: "Goose", page: $0, perPage: 5) }
+
+        Environment.env.session = gooseTestSession()
+        
+        /// # Perform Tests
+        
+        var addedIdentifiers: Int = 0
+        
+        let firstPageExpectation = XCTestExpectation(description: "Load First Page")
+        let secondPageExpectation = XCTestExpectation(description: "Load Second Page")
+        let thirdPageExpectation = XCTestExpectation(description: "Load Third Page")
+                
+        viewModel.errorOccurred = { error in XCTFail(error.debugDescription) }
+        
+        viewModel.nextPageLoaded = { _ in
+            addedIdentifiers += 1
+            switch addedIdentifiers {
+            case 1:
+                firstPageExpectation.fulfill()
+                XCTAssertEqual(viewModel.numberOfItems, 5)
+            case 2:
+                secondPageExpectation.fulfill()
+                XCTAssertEqual(viewModel.numberOfItems, 10)
+            case 3:
+                thirdPageExpectation.fulfill()
+                XCTAssertEqual(viewModel.numberOfItems, 15)
+            default: fatalError("Unreachable")
+            }
+        }
+
+        viewModel.appendNewPage()
+        wait(for: [firstPageExpectation], timeout: 2)
+        viewModel.appendNewPage()
+        wait(for: [secondPageExpectation], timeout: 2)
+        viewModel.appendNewPage()
+        wait(for: [thirdPageExpectation], timeout: 2)
+        
+        (0..<viewModel.numberOfItems).forEach {
+            XCTAssertNotNil(viewModel.item(at: $0).size)
+        }
+        
+        viewModel.reset()
+        XCTAssertEqual(viewModel.numberOfItems, 0)
+    }
     
-    /// Tests the basic functionality of the paged list view-model.
-    func testNextPage() {
-        
-        /// # Prepare Tests
-        
+    private func gooseTestSession() -> TestSession {
         let fm = FileManager.default
         
         let currentBundle = Bundle(for: type(of: self))
@@ -64,51 +104,10 @@ class PageListViewModelTests: XCTestCase {
                 mockResults.append(imageSizeMockResult)
             }
         }
-
-        let testSession = TestSession(mockResults: mockResults)
-        Environment.env.session = testSession
         
-        /// # Perform Tests
-        
-        var addedIdentifiers: Int = 0
-        
-        let firstPageExpectation = XCTestExpectation(description: "Load First Page")
-        let secondPageExpectation = XCTestExpectation(description: "Load Second Page")
-        let thirdPageExpectation = XCTestExpectation(description: "Load Third Page")
-                
-        viewModel.errorOccurred = { error in XCTFail(error.debugDescription) }
-        
-        viewModel.nextPageLoaded = { _ in
-            addedIdentifiers += 1
-            switch addedIdentifiers {
-            case 1:
-                firstPageExpectation.fulfill()
-                XCTAssertEqual(self.viewModel.numberOfItems, 5)
-            case 2:
-                secondPageExpectation.fulfill()
-                XCTAssertEqual(self.viewModel.numberOfItems, 10)
-            case 3:
-                thirdPageExpectation.fulfill()
-                XCTAssertEqual(self.viewModel.numberOfItems, 15)
-            default: fatalError("Unreachable")
-            }
-        }
-
-        viewModel.load(imageListEndpoints[0])
-        wait(for: [firstPageExpectation], timeout: 2)
-        viewModel.append(imageListEndpoints[1])
-        wait(for: [secondPageExpectation], timeout: 2)
-        viewModel.append(imageListEndpoints[2])
-        wait(for: [thirdPageExpectation], timeout: 2)
-        
-        (0..<viewModel.numberOfItems).forEach {
-            let _ = viewModel.size(at: $0)
-        }
-        
-        viewModel.reset()
-        XCTAssertEqual(viewModel.numberOfItems, 0)
+        return TestSession(mockResults: mockResults)
     }
-        
+    
 }
 
 extension Result {

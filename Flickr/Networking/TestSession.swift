@@ -39,7 +39,7 @@ class TestSession: Session {
     
     /// Removes the `MockResult` every time it's found.
     @discardableResult
-    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) -> URLSessionTask! {
+    func download<A>(_ endpoint: Endpoint<A>, onComplete: @escaping (Result<A, Error>) -> ()) -> URLSessionTask? {
         /// Searches the mock responses for an endpoint match. Make sure it's the right type too.
         guard let index = mockResults.firstIndex(where: {
             let match = urlsMatch($0.endpoint.request.url!, b: endpoint.request.url!)

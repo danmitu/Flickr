@@ -16,6 +16,8 @@ struct OptionalTrimmedString {
         set {
             if let newValue = newValue {
                 value = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            } else {
+                value = nil
             }
         }
     }

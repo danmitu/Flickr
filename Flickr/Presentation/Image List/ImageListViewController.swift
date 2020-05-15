@@ -1,21 +1,28 @@
 //
-//  InterestingViewController.swift
+//  ImageListViewController.swift
 //  Flickr
 //
-//  Created by Dan Mitu on 5/12/20.
+//  Created by Dan Mitu on 5/14/20.
 //  Copyright © 2020 Dan Mitu. All rights reserved.
 //
 
 import UIKit
 
-class InterestingViewController: UICollectionViewController, JustifiedLayoutDelegate {
+class ImageListViewController: UICollectionViewController, JustifiedLayoutDelegate {
+    
+    init(viewModel: ImageListViewModel) {
+        self.viewModel = viewModel
+        let layout = JustifiedLayout()
+        super.init(collectionViewLayout: layout)
+        layout.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+    
+    private var viewModel: ImageListViewModel
 
-    // MARK: - View Model
-    
-    private let viewModel = InterestingViewModel()
-    
-    // MARK: - Diffable Data Source
-    
     typealias Item = String
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
@@ -26,12 +33,25 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
         [weak self] collectionView, indexPath, identifier in
         guard let this = self else { return nil }
         if this.shouldLoadNextPage(given: indexPath) {
-            this.viewModel.loadNextPage()
+            this.viewModel.appendNewPage()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
-        let url = this.viewModel.url(at: indexPath.item)
+        let url = this.viewModel.item(at: indexPath.item).url
         cell.imageView.loadImage(at: url)
         return cell
+    }
+    
+    func startLoadingPages() {
+        startAnimatingActivityIndicator()
+
+        viewModel.appendNewPage()
+    }
+    
+    func reset() {
+        viewModel.reset()
+        var snapshot = Snapshot()
+        if snapshot.numberOfSections == 0 { snapshot.appendSections([.main]) }
+        dataSource.apply(snapshot)
     }
     
     private func apply(newItems items: [Item]) {
@@ -51,22 +71,9 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
         guard count > 0 else { return nil }
         return IndexPath(item: count - 1, section: 0)
     }
-
     
     private func shouldLoadNextPage(given indexPath: IndexPath) -> Bool {
         return indexPath == lastIndex && indexPath != firstIndex
-    }
-    
-    // MARK: - Initialization
-    
-    init() {
-        let layout = JustifiedLayout()
-        super.init(collectionViewLayout: layout)
-        layout.delegate = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) is not supported")
     }
     
     // MARK: - View Lifecycle
@@ -92,10 +99,6 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
     
         // Activity Indicator View
         view.addAndCenterSubView(activityIndicatorView)
-        
-        // Final Actions
-        startAnimatingActivityIndicator()
-        viewModel.loadNextPage()
     }
 
     // MARK: - Activity Indicator
@@ -113,8 +116,13 @@ class InterestingViewController: UICollectionViewController, JustifiedLayoutDele
 
     // MARK: - JustifiedLayoutDelegate
     
+    private let fallbackSize = CGSize(width: 100, height: 100)
+    
     func collectionView(_ collectionView: UICollectionView, layout: JustifiedLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(size: viewModel.size(at: indexPath.item))
+        guard let size = viewModel.item(at: indexPath.item).size else { return fallbackSize }
+        return CGSize(size: size)
     }
-        
+
+    
+    
 }
