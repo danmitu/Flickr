@@ -88,15 +88,17 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.reuseIdentifier)
         
         // View Model
-        viewModel.nextPageLoaded = { [weak self] items in
+        
+        viewModel.forNewPage { [weak self] items in
             self?.stopAnimatingActivityIndicator()
             self?.apply(newItems: items)
         }
-        viewModel.errorOccurred = { [weak self] error in
+        
+        viewModel.forError { [weak self] error in
             self?.stopAnimatingActivityIndicator()
             self?.presentErrorAlert(error)
         }
-    
+
         // Activity Indicator View
         view.addAndCenterSubView(activityIndicatorView)
     }

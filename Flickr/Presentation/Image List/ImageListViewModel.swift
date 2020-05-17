@@ -8,21 +8,21 @@
 
 import Foundation
 
+/// A paginated list of images where each image size is available.
 class ImageListViewModel {
-
+    
+    /// Provides the endpoint to update the collection given a page number.
+    /// Setting this resets the view model.
+    var endpointSource: ((Int)->Endpoint<FlickrList>)? { didSet { reset() } }
+    
+    // MARK: - Initialization
+    
     deinit {
         runningTasks.values.forEach { $0.cancel() }
     }
-
-    /// Provides the endpoint to update the collection given a page number.
-    var endpointSource: ((Int)->Endpoint<FlickrList>)?
     
-    /// Passes any newly loaded identifiers.
-    var nextPageLoaded: (([Identifier])->Void)?
+    // MARK: - Data
     
-    /// Passes any errors that occurred.
-    var errorOccurred: ((Error)->Void)?
-
     struct Item {
         let identifier: String
         let url: URL
@@ -54,6 +54,7 @@ class ImageListViewModel {
         items.removeAll()
         runningTasks.values.forEach { $0.cancel() }
         runningTasks.removeAll()
+        isLoadingNextPage = false
     }
     
     private func update(imageList: FlickrList, newItems: [Identifier:Item]) {
@@ -62,33 +63,78 @@ class ImageListViewModel {
         currentPage = imageList.page.pageNumber
         numberPages = imageList.page.pages
         totalImages = imageList.page.total
+        assert(currentPage <= numberPages!)
     }
 
     var isLastPage: Bool { return currentPage == numberPages }
+
+    // MARK: - Observation
     
-    func appendNewPage() {
-        guard !isLastPage else { return }
-        guard !isLoadingNextPage else { return }
-        guard let endpointSource = endpointSource else { return }
+    private var observations = (
+        pageLoaded: [UUID: ([Identifier])->Void](),
+        errorOccurred: [UUID: (Error)->Void]()
+    )
+    
+    @discardableResult
+    func forNewPage(_ callback: @escaping ([Identifier])->Void) -> UUID {
+        let uuid = UUID()
+        observations.pageLoaded[uuid] = callback
+        return uuid
+    }
+    
+    @discardableResult
+    func forError(_ callback: @escaping (Error)->Void) -> UUID {
+        let uuid = UUID()
+        observations.errorOccurred[uuid] = callback
+        return uuid
+    }
+    
+    func cancelObservation(_ uuid: UUID) {
+        observations.pageLoaded[uuid] = nil
+        observations.errorOccurred[uuid] = nil
+    }
+    
+    private func notifyObservers(newPages identifiers: [Identifier]) {
+        observations.pageLoaded.values.forEach { $0(identifiers) }
+    }
+    
+    private func notifyObservers(error: Error) {
+        observations.errorOccurred.values.forEach { $0(error) }
+    }
+        
+    // MARK: - Load Pages
+    
+    @discardableResult
+    func appendNewPage() -> Bool {
+        guard !isLastPage else { return false }
+        guard !isLoadingNextPage else { return false }
+        guard let endpointSource = endpointSource else { return false }
         isLoadingNextPage = true
         let flickr = Flickr()
         let session = Environment.env.session
         let endpoint = endpointSource(currentPage + 1)
         let listTaskId = UUID()
+        /// ** Load List**
         let listTask = session.download(endpoint) { [weak self] result in
             guard let this = self else { return }
             this.runningTasks[listTaskId] = nil
             switch result {
             case let .failure(error):
-                this.errorOccurred?(error)
+                this.notifyObservers(error: error)
                 this.isLoadingNextPage = false
             case let .success(list):
+                // Zips the size for each photo in the list.
                 let zip = DispatchGroup()
                 var items = [Identifier : Item]()
-                list.page.array.forEach { image in
+                let images = list.page.array
+                // Make sure an image isn't inserted more than once (e.g. page 1 is loaded, an image from page 1 moves to page 2, then page 2 is loaded)
+                let newImages = images.filter { !this.identifiers.contains($0.id) }
+                /// ** For each image...**
+                newImages.forEach { image in
                     zip.enter()
                     let sizesEndpoint = flickr.getSizes(photoId: image.id)
                     let sizeId = UUID()
+                    /// ** Load Image Size**
                     let sizeTask = session.download(sizesEndpoint) { result in
                         defer { zip.leave() }
                         this.runningTasks[sizeId] = nil
@@ -109,10 +155,11 @@ class ImageListViewModel {
                     let ids = list.page.array.map { $0.id }
                     this.isLoadingNextPage = false
                     this.update(imageList: list, newItems: items)
-                    this.nextPageLoaded?(ids)
+                    this.notifyObservers(newPages: ids)
                 }
             }
         }
         runningTasks[listTaskId] = listTask
+        return true
     }
 }
