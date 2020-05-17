@@ -12,7 +12,7 @@ class ImageListViewModelTests: XCTestCase {
     
     let flickr = Flickr()
         
-    private func testHappyPath() {
+    func testHappyPath() {
 
         let viewModel = ImageListViewModel()
         viewModel.endpointSource = { self.flickr.search(text: "Goose", page: $0, perPage: 5) }
@@ -20,6 +20,8 @@ class ImageListViewModelTests: XCTestCase {
         Environment.env.session = gooseTestSession()
         
         /// # Perform Tests
+        
+        var appendNewPageSuccess: Bool!
         
         var addedIdentifiers: Int = 0
         
@@ -47,11 +49,14 @@ class ImageListViewModelTests: XCTestCase {
             }
         }
         
-        viewModel.appendNewPage()
+        appendNewPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendNewPageSuccess)
         wait(for: [firstPageExpectation], timeout: 2)
-        viewModel.appendNewPage()
+        appendNewPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendNewPageSuccess)
         wait(for: [secondPageExpectation], timeout: 2)
-        viewModel.appendNewPage()
+        appendNewPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendNewPageSuccess)
         wait(for: [thirdPageExpectation], timeout: 2)
         
         (0..<viewModel.numberOfItems).forEach {
@@ -62,7 +67,7 @@ class ImageListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.numberOfItems, 0)
     }
     
-    private func testTwoObservers() {
+    func testTwoObservers() {
         let viewModel = ImageListViewModel()
         viewModel.endpointSource = { self.flickr.search(text: "Goose", page: $0, perPage: 5) }
 
@@ -90,7 +95,7 @@ class ImageListViewModelTests: XCTestCase {
     }
     
     /// Tries to append when there's no more pages left.
-    private func testAppendBeyondLastPage() {
+    func testAppendBeyondLastPage() {
         let viewModel = ImageListViewModel()
         viewModel.endpointSource = { self.flickr.search(text: "Goose", page: $0, perPage: 5) }
 
@@ -116,24 +121,23 @@ class ImageListViewModelTests: XCTestCase {
             case 1:
                 firstPageExpectation.fulfill()
                 XCTAssertEqual(viewModel.numberOfItems, 5)
-                XCTAssertTrue(appendNewPageSuccess)
             case 2:
                 secondPageExpectation.fulfill()
                 XCTAssertEqual(viewModel.numberOfItems, 10)
-                XCTAssertTrue(appendNewPageSuccess)
             case 3:
                 thirdPageExpectation.fulfill()
                 XCTAssertEqual(viewModel.numberOfItems, 15)
-                XCTAssertTrue(appendNewPageSuccess)
             default: fatalError("Unreachable")
             }
         }
         
         appendNewPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendNewPageSuccess)
         wait(for: [firstPageExpectation], timeout: 2)
         appendNewPageSuccess = viewModel.appendNewPage()
         wait(for: [secondPageExpectation], timeout: 2)
         appendNewPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendNewPageSuccess)
         wait(for: [thirdPageExpectation], timeout: 2)
 
         appendNewPageSuccess = viewModel.appendNewPage()
@@ -142,7 +146,7 @@ class ImageListViewModelTests: XCTestCase {
     }
     
     /// Makes sure that no more callbacks are made after cancelling an observation.
-    private func testCanceledObservations() {
+    func testCanceledObservations() {
         let viewModel = ImageListViewModel()
         viewModel.endpointSource = { self.flickr.search(text: "Goose", page: $0, perPage: 5) }
 
@@ -184,7 +188,7 @@ class ImageListViewModelTests: XCTestCase {
     }
     
     /// Setting the endpoint source resets the page. Affirm the correct behavior.
-    private func testSetEndpointSource() {
+    func testSetEndpointSource() {
         let viewModel = ImageListViewModel()
         Environment.env.session = gooseTestSession()
         XCTAssertFalse(viewModel.appendNewPage())
@@ -209,31 +213,31 @@ class ImageListViewModelTests: XCTestCase {
             case 1:
                 firstPageExpectation.fulfill()
                 XCTAssertEqual(viewModel.numberOfItems, 5)
-                XCTAssertTrue(appendPageSuccess)
             case 2:
                 secondPageExpectation.fulfill()
                 XCTAssertEqual(viewModel.numberOfItems, 10)
-                XCTAssertTrue(appendPageSuccess)
             case 3:
                 thirdPageExpectation.fulfill()
                 XCTAssertEqual(viewModel.numberOfItems, 15)
-                XCTAssertTrue(appendPageSuccess)
             default: fatalError("Unreachable")
             }
         }
 
         appendPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendPageSuccess)
         wait(for: [firstPageExpectation], timeout: 2)
         appendPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendPageSuccess)
         wait(for: [secondPageExpectation], timeout: 2)
         appendPageSuccess = viewModel.appendNewPage()
+        XCTAssertTrue(appendPageSuccess)
         wait(for: [thirdPageExpectation], timeout: 2)
-
+        
         viewModel.endpointSource = { self.flickr.search(text: "Goose", page: $0, perPage: 0) }
         XCTAssertEqual(viewModel.numberOfItems, 0)
     }
     
-    private func gooseTestSession() -> TestSession {
+    func gooseTestSession() -> TestSession {
         let fm = FileManager.default
         
         let currentBundle = Bundle(for: type(of: self))

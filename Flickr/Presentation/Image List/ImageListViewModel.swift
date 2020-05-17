@@ -39,7 +39,7 @@ class ImageListViewModel {
     
     var numberOfItems: Int { identifiers.count }
     
-    @PositiveInt private(set) var currentPage = 1
+    @PositiveInt private(set) var currentPage = 0
     @OptionalPostiveInt private var numberPages = nil
     @OptionalPostiveInt private var totalImages = nil
     private var isLoadingNextPage = false
@@ -47,7 +47,7 @@ class ImageListViewModel {
     private var runningTasks = [UUID:URLSessionTask]()
     
     func reset() {
-        currentPage = 1
+        currentPage = 0
         numberPages = nil
         totalImages = nil
         identifiers.removeAll()
