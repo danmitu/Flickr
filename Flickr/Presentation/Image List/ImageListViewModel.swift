@@ -163,3 +163,22 @@ class ImageListViewModel {
         return true
     }
 }
+
+extension ImageListViewModel: Collection {
+        
+    typealias CollectionType = [Item]
+    typealias Index = CollectionType.Index
+    typealias Element = CollectionType.Element
+    
+    var startIndex: Index { return identifiers.startIndex }
+    var endIndex: Index { return identifiers.endIndex }
+
+    subscript(index: Index) -> Iterator.Element {
+        get { return item(at: index) }
+    }
+
+    func index(after i: Index) -> Index {
+        return identifiers.index(after: i)
+    }
+
+}
