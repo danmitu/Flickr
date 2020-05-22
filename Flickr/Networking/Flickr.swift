@@ -16,6 +16,11 @@ struct Flickr {
         return propertyList("APIKeys", bundle: Bundle.main)["Flickr"] as! String
     }()
 
+    static func imageURL(farm: String, server: String, id: String, secret: String) -> URL {
+        let path = "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
+        return URL(string: path)!
+    }
+    
     func search(text: String, page: Int, perPage: Int) -> Endpoint<FlickrList> {
         
         let query: [String:String] = [

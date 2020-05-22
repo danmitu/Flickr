@@ -9,10 +9,11 @@
 import Foundation
 
 class TextResultsViewController: ImageListViewController {
-    
-    @OptionalTrimmedString var textQuery: String? {
+
+    var textQuery: String? {
         didSet {
-            guard let textQuery = textQuery else { reset(); return }
+            reset()
+            guard let textQuery = textQuery else { return }
             viewModel.search(query: textQuery)
         }
     }

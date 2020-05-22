@@ -173,7 +173,7 @@ extension ImageListViewModel: Collection {
     var startIndex: Index { return identifiers.startIndex }
     var endIndex: Index { return identifiers.endIndex }
 
-    subscript(index: Index) -> Iterator.Element {
+    subscript(index: Index) -> CollectionType.Element {
         get { return item(at: index) }
     }
 

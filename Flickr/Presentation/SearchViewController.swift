@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
-  
+class SearchViewController: UIViewController, UISearchBarDelegate, ImageListViewControllerDelegate {
+    
     private lazy var searchController = UISearchController(searchResultsController: searchResultsViewController)
 
     private let searchResultsViewController = TextResultsViewController()
@@ -28,6 +28,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
+        defaultContentViewController.delegate = self
+        searchResultsViewController.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,5 +47,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchResultsViewController.textQuery = searchBar.text ?? ""
     }
 
+    // MARK: - ImageListViewControllerDelegate
     
+    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool) {
+        navigationController!.pushViewController(viewController, animated: animated)
+    }
+
 }

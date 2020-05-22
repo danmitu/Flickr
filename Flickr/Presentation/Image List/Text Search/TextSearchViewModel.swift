@@ -10,12 +10,12 @@ import Foundation
 
 class TextSearchViewModel: ImageListViewModel {
 
-    private(set) var query: String?
+    @TrimmedString private(set) var query: String = ""
     
     override init() {
         super.init()
         self.endpointSource = { [weak self] in
-            Flickr().search(text: self!.query!, page: $0, perPage: 30)
+            Flickr().search(text: self!.query, page: $0, perPage: 30)
         }
     }
 

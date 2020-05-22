@@ -14,7 +14,17 @@ protocol JustifiedLayoutDelegate: class {
 
 }
 
+/**
+ A collection view layout where...
+ - Each image is displayed entirely, maintaining aspect ratio.
+ - Each row fits the width of the device.
+ - The distance between images is constant.
+ */
 class JustifiedLayout: UICollectionViewLayout {
+    
+    /**
+     How this layout works: Grab the first image of the row. This is also the height of the row. Keep appending images to the to row until the sum of the widths is greater than or equal to the width of the device. Then, shrink the row to fit the width of the device.
+     */
     
     weak var delegate: JustifiedLayoutDelegate!
     
