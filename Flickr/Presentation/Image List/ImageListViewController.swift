@@ -51,7 +51,6 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     func startLoadingPages() {
         startAnimatingActivityIndicator()
-
         viewModel.appendNewPage()
     }
     
@@ -126,7 +125,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     private let activityIndicatorView = UIActivityIndicatorView(style: .large)
     
     private func startAnimatingActivityIndicator() {
-        guard dataSource.snapshot().numberOfItems > 0 else { return }
+        guard dataSource.snapshot().numberOfItems <= 0 else { return }
         activityIndicatorView.startAnimating()
     }
     

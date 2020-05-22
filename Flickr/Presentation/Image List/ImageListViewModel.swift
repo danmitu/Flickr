@@ -129,6 +129,7 @@ class ImageListViewModel {
                 let images = list.page.array
                 // Make sure an image isn't inserted more than once (e.g. page 1 is loaded, an image from page 1 moves to page 2, then page 2 is loaded)
                 let newImages = images.filter { !this.identifiers.contains($0.id) }
+                var idsWithSizes = Set<Identifier>()
                 /// ** For each image...**
                 newImages.forEach { image in
                     zip.enter()
@@ -142,6 +143,7 @@ class ImageListViewModel {
                         case let .failure(error):
                             error.log()
                         case let .success(sizeInfo):
+                            idsWithSizes.insert(image.id)
                             let size = sizeInfo.sizes.preferredSize.size
                             items[image.id] = Item(identifier: image.id,
                                                    url: image.url,
@@ -152,7 +154,7 @@ class ImageListViewModel {
                 }
                 zip.notify(queue: .main) { [weak self] in
                     guard let this = self else { return }
-                    let ids = list.page.array.map { $0.id }
+                    let ids = list.page.array.map({ $0.id }).filter({ idsWithSizes.contains($0) })
                     this.isLoadingNextPage = false
                     this.update(imageList: list, newItems: items)
                     this.notifyObservers(newPages: ids)
