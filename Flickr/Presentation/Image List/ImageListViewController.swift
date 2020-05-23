@@ -163,7 +163,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     /// What's the VC when the user swipes left to right?
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let index = pageIndex[viewController.hashValue]!
+        guard let index = pageIndex[viewController.hashValue] else { return nil }
         let prevIndex = index - 1
         guard let beforeViewController = imageScrollViewController(for: prevIndex) else {
             return nil
