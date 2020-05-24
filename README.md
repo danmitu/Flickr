@@ -14,3 +14,7 @@ This project will eventually be able to...
 - Display a photo's metadata
 - Authenticate a user
 - Upload photos to the user's camera album
+
+# Screenshots
+
+![Justified layout screenshot](screenshots/Justified Layout 2020-05-23 at 8.19.31 PM)
