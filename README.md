@@ -17,4 +17,4 @@ This project will eventually be able to...
 
 # Screenshots
 
-[Justified layout screenshot]("screenshots/Justified Layout 2020-05-23 at 8.19.31 PM")
+![Justified layout screenshot](screenshots/Justified%20Layout%202020-05-23%20at%208.19.31%20PM)
