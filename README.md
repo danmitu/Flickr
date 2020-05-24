@@ -17,4 +17,4 @@ This project will eventually be able to...
 
 # Screenshots
 
-![Justified layout screenshot](Screenshots/Justified%20aLayout%202020-05-23%20at%208.19.31%20PM)
+![Justified layout screenshot](Screenshots/Justified%20Layout%202020-05-23%20at%208.19.31%20PM.png)
