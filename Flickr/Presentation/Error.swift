@@ -27,6 +27,7 @@ extension Error {
         case let nsError as NSError:
             switch nsError.code {
             case NSURLErrorCancelled: return false
+            case NSURLErrorNotConnectedToInternet: return false
             default: break
             }
         default: break
@@ -52,7 +53,13 @@ extension Error {
     
     // This is what users see. In the future, it may be more descriptive.
     var description: String {
-        return "There was an error."
+        switch self {
+        case let nsError as NSError:
+            return nsError.localizedDescription
+        default:
+            return "There was an error."
+        }
+        
     }
     
 }

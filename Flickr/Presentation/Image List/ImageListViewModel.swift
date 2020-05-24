@@ -95,11 +95,16 @@ class ImageListViewModel {
     }
     
     private func notifyObservers(newPages identifiers: [Identifier]) {
-        observations.pageLoaded.values.forEach { $0(identifiers) }
+        DispatchQueue.main.async {
+            self.observations.pageLoaded.values.forEach { $0(identifiers) }
+        }
+        
     }
     
     private func notifyObservers(error: Error) {
-        observations.errorOccurred.values.forEach { $0(error) }
+        DispatchQueue.main.async {
+            self.observations.errorOccurred.values.forEach { $0(error) }
+        }
     }
         
     // MARK: - Load Pages
