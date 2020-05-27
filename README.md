@@ -16,6 +16,6 @@ This project will eventually be able to...
 - Upload photos to the user's camera album
 
 # Screenshots
-<img src="Screenshots/Justified%20Layout%202020-05-23%20at%208.19.31%20PM.png" width="400">
+<img src="Screenshots/Screen%20Shot%202020-05-23%20at%208.39.02%20PM.png" width="400">
 
 *Justified Layout*
