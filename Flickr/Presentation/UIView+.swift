@@ -19,4 +19,21 @@ extension UIView {
         ])
     }
     
+    func anchorSidesToSuperView() {
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: superview!.leadingAnchor),
+            trailingAnchor.constraint(equalTo: superview!.trailingAnchor),
+            topAnchor.constraint(equalTo: superview!.topAnchor),
+            bottomAnchor.constraint(equalTo: superview!.bottomAnchor),
+        ])
+    }
+    
+    func anchorCenterToSuperView() {
+        NSLayoutConstraint.activate([
+            centerXAnchor.constraint(equalTo: superview!.centerXAnchor),
+            centerYAnchor.constraint(equalTo: superview!.centerYAnchor),
+        ])
+    }
+    
 }
+

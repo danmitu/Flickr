@@ -50,27 +50,21 @@ class ImageScrollView: UIView {
     }
     
     private func sharedInit() {
+        backgroundColor = .systemBackground
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap))
         singleTapGesture.require(toFail: doubleTapGesture)
         doubleTapGesture.numberOfTapsRequired = 2
+        addSubview(scrollView)
+        scrollView.addSubview(imageView)
         scrollView.addGestureRecognizer(singleTapGesture)
         scrollView.addGestureRecognizer(doubleTapGesture)
         scrollView.delegate = self
-        backgroundColor = .systemBackground
-        addSubview(scrollView)
-        scrollView.addSubview(imageView)
+        scrollView.anchorSidesToSuperView()
+        imageView.anchorCenterToSuperView()
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            imageView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             ])
     }
     
