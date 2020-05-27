@@ -14,7 +14,7 @@ protocol ImageListViewControllerDelegate: class {
     
 }
 
-class ImageListViewController: UICollectionViewController, JustifiedLayoutDelegate, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class ImageListViewController: UICollectionViewController, JustifiedLayoutDelegate, UIPageViewControllerDelegate, UIPageViewControllerDataSource, ImageScrollViewControllerDelegate {
     
     weak var delegate: ImageListViewControllerDelegate?
     
@@ -142,7 +142,25 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         return CGSize(size: size)
     }
     
-    // MARK: - Paged Images
+    // MARK: - Paged Images & ImageScrollViewControllerDelegate
+    
+    private var useFullScreen = false
+    
+    func didTap(_ imageScrollViewController: ImageScrollViewController) {
+        toggleFullScreen()
+    }
+
+    func didDoubleTap(_ imageScrollViewController: ImageScrollViewController) {
+        toggleFullScreen()
+    }
+
+    private func toggleFullScreen() {
+        useFullScreen = !useFullScreen
+        pageViewController.viewControllers?.forEach {
+            let vc = ($0 as! ImageScrollViewController)
+            vc.isFullScreen = useFullScreen
+        }
+    }
     
     // TODO: Nice little comment explaining how I do this part.
     
@@ -154,9 +172,8 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     private func presentPageViewController(for index: Int) {
         pageIndex.removeAll() // Reset from a previous session.
         let vc = imageScrollViewController(for: index)!
-        pageViewController.setViewControllers([vc],
-                                              direction: .forward,
-                                              animated: true)
+        vc.delegate = self
+        pageViewController.setViewControllers([vc], direction: .forward, animated: true)
         pageIndex[vc.hashValue] = index
         delegate?.imageListViewConroller(self, push: pageViewController, animated: true)
     }
@@ -165,10 +182,9 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = pageIndex[viewController.hashValue] else { return nil }
         let prevIndex = index - 1
-        guard let beforeViewController = imageScrollViewController(for: prevIndex) else {
-            return nil
-        }
+        guard let beforeViewController = imageScrollViewController(for: prevIndex) else { return nil }
         pageIndex[beforeViewController.hashValue] = prevIndex
+        beforeViewController.delegate = self
         return beforeViewController
     }
     
@@ -176,10 +192,9 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let index = pageIndex[viewController.hashValue]!
         let nextIndex = index + 1
-        guard let afterViewController = imageScrollViewController(for: nextIndex) else {
-            return nil
-        }
+        guard let afterViewController = imageScrollViewController(for: nextIndex) else { return nil }
         pageIndex[afterViewController.hashValue] = nextIndex
+        afterViewController.delegate = self
         return afterViewController
     }
 
@@ -189,6 +204,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         let viewController = ImageScrollViewController()
         let url = viewModel.item(at: index).url
         viewController.loadImage(url)
+        viewController.isFullScreen = useFullScreen
         return viewController
     }
         

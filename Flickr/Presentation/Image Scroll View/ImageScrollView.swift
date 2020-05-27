@@ -18,7 +18,7 @@ protocol ImageScrollViewDelegate: class {
 }
 
 /// Display an image that you can pinch to zoom, drag to pan, double tap to zoom out, and single tap to do whatever.
-class ImageScrollView: UIView {
+class ImageScrollView: UIView, UIScrollViewDelegate {
     
     weak var delegate: ImageScrollViewDelegate?
     
@@ -38,7 +38,7 @@ class ImageScrollView: UIView {
         view.accessibilityIgnoresInvertColors = true
         return view
     }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -50,7 +50,7 @@ class ImageScrollView: UIView {
     }
     
     private func sharedInit() {
-        backgroundColor = .systemBackground
+        scrollView.backgroundColor = .systemBackground
         let singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap))
         singleTapGesture.require(toFail: doubleTapGesture)
@@ -77,12 +77,10 @@ class ImageScrollView: UIView {
     }
     
     func zoomOutToFrame() {
-        scrollView.zoom(to: imageView.frame, animated: true)
+        scrollView.setZoomScale(1, animated: true)
     }
     
-}
-
-extension ImageScrollView: UIScrollViewDelegate {
+    // MARK: - ScrollViewDelegate
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidZoom(scrollView)
