@@ -251,20 +251,20 @@
 				92D41088246BB1B20071778A /* CGSize+.swift */,
 				92D4108C246BB2630071778A /* ImageCollectionViewCell.swift */,
 				92D41099246BD4FA0071778A /* SearchViewController.swift */,
-				926146DD2474801C00001E61 /* Image Scroll View */,
+				926146DD2474801C00001E61 /* Photo View */,
 				9290F143246E4FD30010AA15 /* Image List */,
 				92D41090246BD2000071778A /* Image Loading */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		926146DD2474801C00001E61 /* Image Scroll View */ = {
+		926146DD2474801C00001E61 /* Photo View */ = {
 			isa = PBXGroup;
 			children = (
 				926146D924747F0600001E61 /* PhotoView.swift */,
 				926146DE247480D100001E61 /* PhotoViewController.swift */,
 			);
-			path = "Image Scroll View";
+			path = "Photo View";
 			sourceTree = "<group>";
 		};
 		9265CAE724663AF1003F3777 /* ImageListViewModelTests */ = {
