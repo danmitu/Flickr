@@ -1,5 +1,5 @@
 //
-//  PhotoView.swift
+//  ImageScrollView.swift
 //  Flickr
 //
 //  Created by Dan Mitu on 5/19/20.
@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol PhotoViewDelegate: class {
+protocol ImageScrollViewDelegate: class {
     
-    func didTap(_ imageScrollView: PhotoView)
-    func didDoubleTap(_ imageScrollView: PhotoView)
+    func didTap(_ imageScrollView: ImageScrollView)
+    func didDoubleTap(_ imageScrollView: ImageScrollView)
     func scrollViewDidZoom(_ scrollView: UIScrollView)
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     
 }
 
 /// Display an image that you can pinch to zoom, drag to pan, double tap to zoom out, and single tap to do whatever.
-class PhotoView: UIView {
+class ImageScrollView: UIView {
     
-    weak var delegate: PhotoViewDelegate?
+    weak var delegate: ImageScrollViewDelegate?
     
     let scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -88,7 +88,7 @@ class PhotoView: UIView {
     
 }
 
-extension PhotoView: UIScrollViewDelegate {
+extension ImageScrollView: UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidZoom(scrollView)

@@ -1,5 +1,5 @@
 //
-//  PhotoViewController.swift
+//  ImageScrollViewController.swift
 //  Flickr
 //
 //  Created by Dan Mitu on 5/19/20.
@@ -9,13 +9,13 @@
 import UIKit
 
 /// Display a scrollable image. Cancels any image loading when the view disappears.
-class PhotoViewController: UIViewController {
+class ImageScrollViewController: UIViewController {
     
     func loadImage(_ url: URL) {
         imageScrollView.imageView.loadImage(at: url)
     }
     
-    private let imageScrollView = PhotoView()
+    private let imageScrollView = ImageScrollView()
     
     override func loadView() {
         self.view = imageScrollView
@@ -29,13 +29,13 @@ class PhotoViewController: UIViewController {
     
 }
 
-extension PhotoViewController: PhotoViewDelegate {
+extension ImageScrollViewController: ImageScrollViewDelegate {
     
     /// Does nothing by default.
-    func didTap(_ imageScrollView: PhotoView) {}
+    func didTap(_ imageScrollView: ImageScrollView) {}
     
     /// Zooms out to display the entire photo.
-    func didDoubleTap(_ imageScrollView: PhotoView) {
+    func didDoubleTap(_ imageScrollView: ImageScrollView) {
         imageScrollView.zoomOutToFrame()
     }
     

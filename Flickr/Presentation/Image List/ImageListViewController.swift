@@ -153,7 +153,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     private func presentPageViewController(for index: Int) {
         pageIndex.removeAll() // Reset from a previous session.
-        let vc = photoViewController(for: index)!
+        let vc = imageScrollViewController(for: index)!
         pageViewController.setViewControllers([vc],
                                               direction: .forward,
                                               animated: true)
@@ -165,7 +165,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = pageIndex[viewController.hashValue] else { return nil }
         let prevIndex = index - 1
-        guard let beforeViewController = photoViewController(for: prevIndex) else {
+        guard let beforeViewController = imageScrollViewController(for: prevIndex) else {
             return nil
         }
         pageIndex[beforeViewController.hashValue] = prevIndex
@@ -176,7 +176,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let index = pageIndex[viewController.hashValue]!
         let nextIndex = index + 1
-        guard let afterViewController = photoViewController(for: nextIndex) else {
+        guard let afterViewController = imageScrollViewController(for: nextIndex) else {
             return nil
         }
         pageIndex[afterViewController.hashValue] = nextIndex
@@ -184,9 +184,9 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     }
 
     /// Returns the view controller individual "page" matching the view model data at a given index.
-    private func photoViewController(for index: Int) -> PhotoViewController? {
+    private func imageScrollViewController(for index: Int) -> ImageScrollViewController? {
         guard viewModel.indices.contains(index) else { return nil }
-        let viewController = PhotoViewController()
+        let viewController = ImageScrollViewController()
         let url = viewModel.item(at: index).url
         viewController.loadImage(url)
         return viewController
