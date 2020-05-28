@@ -10,13 +10,15 @@ import UIKit
 
 protocol ImageListViewControllerDelegate: class {
     
-    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool)
+    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool, with transitionController: ZoomTransitionController)
     
 }
 
 class ImageListViewController: UICollectionViewController, JustifiedLayoutDelegate, UIPageViewControllerDelegate, UIPageViewControllerDataSource, ImageScrollViewControllerDelegate {
     
     weak var delegate: ImageListViewControllerDelegate?
+    
+    let transitionController = ZoomTransitionController()
     
     init(viewModel: ImageListViewModel) {
         self.viewModel = viewModel
@@ -86,6 +88,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
         presentPageViewController(for: indexPath.item)
     }
     
@@ -169,17 +172,27 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     /// Uses the view contorller hash value to associate it with an index.
     private var pageIndex = [Int : Int]()
     
+    func indexPath(of viewController: UIViewController) -> IndexPath? {
+        if let item = pageIndex[viewController.hashValue] {
+            return IndexPath(item: item, section: 0)
+        }
+        return nil
+    }
+    
     private func presentPageViewController(for index: Int) {
         pageIndex.removeAll() // Reset from a previous session.
         let vc = imageScrollViewController(for: index)!
-        vc.delegate = self
         pageViewController.setViewControllers([vc], direction: .forward, animated: true)
         pageIndex[vc.hashValue] = index
-        delegate?.imageListViewConroller(self, push: pageViewController, animated: true)
+        delegate?.imageListViewConroller(self,
+                                         push: pageViewController,
+                                         animated: true,
+                                         with: vc.transitionController)
     }
     
     /// What's the VC when the user swipes left to right?
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        print("Back")
         guard let index = pageIndex[viewController.hashValue] else { return nil }
         let prevIndex = index - 1
         guard let beforeViewController = imageScrollViewController(for: prevIndex) else { return nil }
@@ -190,6 +203,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     /// What's the VC when the user swipes right to left?
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        print("Front")
         let index = pageIndex[viewController.hashValue]!
         let nextIndex = index + 1
         guard let afterViewController = imageScrollViewController(for: nextIndex) else { return nil }
@@ -197,7 +211,18 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         afterViewController.delegate = self
         return afterViewController
     }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        if let nextViewController = pendingViewControllers.first as? ImageScrollViewController {
+            nextIndexPath = indexPath(of: nextViewController)
+        }
+    }
 
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        selectedIndexPath = nextIndexPath
+        nextIndexPath = nil
+    }
+    
     /// Returns the view controller individual "page" matching the view model data at a given index.
     private func imageScrollViewController(for index: Int) -> ImageScrollViewController? {
         guard viewModel.indices.contains(index) else { return nil }
@@ -205,8 +230,130 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         let url = viewModel.item(at: index).url
         viewController.loadImage(url)
         viewController.isFullScreen = useFullScreen
+        viewController.delegate = self
+        viewController.transitionController.fromDelegate = self
+        viewController.transitionController.toDelegate = viewController
         return viewController
+    }
+    
+    private var selectedIndexPath: IndexPath!
+    
+    private var nextIndexPath: IndexPath!
+    
+    //This function prevents the collectionView from accessing a deallocated cell. In the event
+    //that the cell for the selectedIndexPath is nil, a default UIImageView is returned in its place
+    func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
+        
+        //Get the array of visible cells in the collectionView
+        let visibleCells = self.collectionView.indexPathsForVisibleItems
+        
+        //If the current indexPath is not visible in the collectionView,
+        //scroll the collectionView to the cell to prevent it from returning a nil value
+        if !visibleCells.contains(self.selectedIndexPath) {
+           
+            //Scroll the collectionView to the current selectedIndexPath which is offscreen
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+            
+            //Reload the items at the newly visible indexPaths
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            self.collectionView.layoutIfNeeded()
+            
+            //Guard against nil values
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell) else {
+                //Return a default UIImageView
+                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+            }
+            //The PhotoCollectionViewCell was found in the collectionView, return the image
+            return guardedCell.imageView
+        }
+        else {
+            
+            //Guard against nil return values
+            guard let guardedCell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell else {
+                //Return a default UIImageView
+                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
+            }
+            //The PhotoCollectionViewCell was found in the collectionView, return the image
+            return guardedCell.imageView
+        }
+        
+    }
+    
+    //This function prevents the collectionView from accessing a deallocated cell. In the
+    //event that the cell for the selectedIndexPath is nil, a default CGRect is returned in its place
+    func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
+        
+        //Get the currently visible cells from the collectionView
+        let visibleCells = self.collectionView.indexPathsForVisibleItems
+        
+        //If the current indexPath is not visible in the collectionView,
+        //scroll the collectionView to the cell to prevent it from returning a nil value
+        if !visibleCells.contains(self.selectedIndexPath) {
+            
+            //Scroll the collectionView to the cell that is currently offscreen
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+            
+            //Reload the items at the newly visible indexPaths
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            self.collectionView.layoutIfNeeded()
+            
+            //Prevent the collectionView from returning a nil value
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell) else {
+                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+            }
+            
+            return guardedCell.frame
+        }
+        //Otherwise the cell should be visible
+        else {
+            //Prevent the collectionView from returning a nil value
+            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell) else {
+                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
+            }
+            //The cell was found successfully
+            return guardedCell.frame
+        }
     }
         
 }
 
+extension ImageListViewController: ZoomAnimatorDelegate {
+    
+    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
+        
+    }
+    
+    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+        
+        let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as! ImageCollectionViewCell
+
+        let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
+
+        if cellFrame.minY < self.collectionView.contentInset.top {
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
+        } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
+            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
+        }
+    }
+    
+    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        return getImageViewFromCollectionViewCell(for: selectedIndexPath)
+    }
+    
+    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
+        self.view.layoutIfNeeded()
+        self.collectionView.layoutIfNeeded()
+
+        //Get a guarded reference to the cell's frame
+        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
+
+        let cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
+
+        if cellFrame.minY < self.collectionView.contentInset.top {
+            return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
+        }
+
+        return cellFrame
+    }
+    
+}

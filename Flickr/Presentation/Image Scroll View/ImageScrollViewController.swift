@@ -15,7 +15,7 @@ protocol ImageScrollViewControllerDelegate: class {
 
 /// Display a scrollable image. Cancels any image loading when the view disappears.
 class ImageScrollViewController: UIViewController, ImageScrollViewDelegate {
-    
+        
     var isFullScreen: Bool = false {
         didSet {
             imageScrollView.scrollView.backgroundColor = isFullScreen ? .black : .systemBackground
@@ -27,8 +27,10 @@ class ImageScrollViewController: UIViewController, ImageScrollViewDelegate {
     func loadImage(_ url: URL) {
         imageScrollView.imageView.loadImage(at: url)
     }
-    
+
     weak var delegate: ImageScrollViewControllerDelegate?
+    
+    let transitionController = ZoomTransitionController()
     
     private let imageScrollView = ImageScrollView()
     
@@ -63,3 +65,19 @@ class ImageScrollViewController: UIViewController, ImageScrollViewDelegate {
     
 }
 
+extension ImageScrollViewController: ZoomAnimatorDelegate {
+    
+    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
+    }
+    
+    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+    }
+    
+    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        return imageScrollView.imageView
+    }
+    
+    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
+        return view.convert(imageScrollView.imageView.frame, to: view)
+    }
+}

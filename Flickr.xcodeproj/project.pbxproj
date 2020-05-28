@@ -63,6 +63,15 @@
 		9274197A24650C5E002981DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9274197924650C5E002981DD /* Assets.xcassets */; };
 		9274197D24650C5E002981DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274197B24650C5E002981DD /* LaunchScreen.storyboard */; };
 		9274198824650C5E002981DD /* FlickrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274198724650C5E002981DD /* FlickrTests.swift */; };
+		928B8D51247F526300157430 /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D50247F526300157430 /* ZoomAnimator.swift */; };
+		928B8D52247F526300157430 /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D50247F526300157430 /* ZoomAnimator.swift */; };
+		928B8D53247F526300157430 /* ZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D50247F526300157430 /* ZoomAnimator.swift */; };
+		928B8D55247F53C700157430 /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D54247F53C700157430 /* ZoomDismissalInteractionController.swift */; };
+		928B8D56247F53C700157430 /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D54247F53C700157430 /* ZoomDismissalInteractionController.swift */; };
+		928B8D57247F53C700157430 /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D54247F53C700157430 /* ZoomDismissalInteractionController.swift */; };
+		928B8D59247F541F00157430 /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D58247F541F00157430 /* ZoomTransitionController.swift */; };
+		928B8D5A247F541F00157430 /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D58247F541F00157430 /* ZoomTransitionController.swift */; };
+		928B8D5B247F541F00157430 /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D58247F541F00157430 /* ZoomTransitionController.swift */; };
 		9290F132246E2DE30010AA15 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListViewModel.swift */; };
 		9290F133246E2DE30010AA15 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListViewModel.swift */; };
 		9290F134246E2DE30010AA15 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListViewModel.swift */; };
@@ -158,6 +167,9 @@
 		9274198E24650C5E002981DD /* FlickrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274199224650C5E002981DD /* FlickrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITests.swift; sourceTree = "<group>"; };
 		9274199424650C5E002981DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		928B8D50247F526300157430 /* ZoomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAnimator.swift; sourceTree = "<group>"; };
+		928B8D54247F53C700157430 /* ZoomDismissalInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomDismissalInteractionController.swift; sourceTree = "<group>"; };
+		928B8D58247F541F00157430 /* ZoomTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitionController.swift; sourceTree = "<group>"; };
 		9290F131246E2DE30010AA15 /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
 		9290F135246E33850010AA15 /* PositiveInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositiveInt.swift; sourceTree = "<group>"; };
 		9290F13C246E3F0C0010AA15 /* ImageListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModelTests.swift; sourceTree = "<group>"; };
@@ -254,6 +266,7 @@
 				926146DD2474801C00001E61 /* Image Scroll View */,
 				9290F143246E4FD30010AA15 /* Image List */,
 				92D41090246BD2000071778A /* Image Loading */,
+				928B8D4F247F523A00157430 /* Animation */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -326,6 +339,16 @@
 				9274199424650C5E002981DD /* Info.plist */,
 			);
 			path = FlickrUITests;
+			sourceTree = "<group>";
+		};
+		928B8D4F247F523A00157430 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				928B8D50247F526300157430 /* ZoomAnimator.swift */,
+				928B8D54247F53C700157430 /* ZoomDismissalInteractionController.swift */,
+				928B8D58247F541F00157430 /* ZoomTransitionController.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		9290F143246E4FD30010AA15 /* Image List */ = {
@@ -502,11 +525,13 @@
 				926146DF247480D100001E61 /* ImageScrollViewController.swift in Sources */,
 				920387502465102200ECFCCD /* Session.swift in Sources */,
 				9290F14D246E5C420010AA15 /* TextResultsViewController.swift in Sources */,
+				928B8D51247F526300157430 /* ZoomAnimator.swift in Sources */,
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
 				9290F132246E2DE30010AA15 /* ImageListViewModel.swift in Sources */,
 				92D41096246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92038763246514D700ECFCCD /* FlickrSizesInfo.swift in Sources */,
+				928B8D59247F541F00157430 /* ZoomTransitionController.swift in Sources */,
 				92D4109A246BD4FA0071778A /* SearchViewController.swift in Sources */,
 				92D41085246BA5DF0071778A /* UIViewController+.swift in Sources */,
 				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
@@ -515,6 +540,7 @@
 				920387522465104900ECFCCD /* TestSession.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
 				92038785246518EB00ECFCCD /* Flickr.swift in Sources */,
+				928B8D55247F53C700157430 /* ZoomDismissalInteractionController.swift in Sources */,
 				92D41092246BD21D0071778A /* ImageLoader.swift in Sources */,
 				9290F136246E33850010AA15 /* PositiveInt.swift in Sources */,
 				924709E52465EA9400EC9F9E /* Dictionary+.swift in Sources */,
@@ -545,18 +571,21 @@
 				92B19FF6246A4C37003F3437 /* TextSearchViewModel.swift in Sources */,
 				92038765246514F000ECFCCD /* FlickrList.swift in Sources */,
 				9203878E24651E7C00ECFCCD /* Flickr.swift in Sources */,
+				928B8D5A247F541F00157430 /* ZoomTransitionController.swift in Sources */,
 				9290F137246E33850010AA15 /* PositiveInt.swift in Sources */,
 				9290F133246E2DE30010AA15 /* ImageListViewModel.swift in Sources */,
 				920387732465154D00ECFCCD /* SceneDelegate.swift in Sources */,
 				92D41082246BA3DB0071778A /* UIView+.swift in Sources */,
 				9274198824650C5E002981DD /* FlickrTests.swift in Sources */,
 				924709E62465EA9400EC9F9E /* Dictionary+.swift in Sources */,
+				928B8D52247F526300157430 /* ZoomAnimator.swift in Sources */,
 				92D4108E246BB2630071778A /* ImageCollectionViewCell.swift in Sources */,
 				92038764246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876C2465154000ECFCCD /* Endpoint.swift in Sources */,
 				92D41086246BA5DF0071778A /* UIViewController+.swift in Sources */,
 				9290F13D246E3F0C0010AA15 /* ImageListViewModelTests.swift in Sources */,
 				92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */,
+				928B8D56247F53C700157430 /* ZoomDismissalInteractionController.swift in Sources */,
 				92D4107E246BA2660071778A /* JustifiedLayout.swift in Sources */,
 				92D4108A246BB1B20071778A /* CGSize+.swift in Sources */,
 				926146DB24747F0600001E61 /* ImageScrollView.swift in Sources */,
@@ -579,11 +608,13 @@
 				926146E1247480D100001E61 /* ImageScrollViewController.swift in Sources */,
 				920387772465154D00ECFCCD /* Utility.swift in Sources */,
 				9290F14F246E5C420010AA15 /* TextResultsViewController.swift in Sources */,
+				928B8D53247F526300157430 /* ZoomAnimator.swift in Sources */,
 				920387752465154D00ECFCCD /* AppDelegate.swift in Sources */,
 				9290F134246E2DE30010AA15 /* ImageListViewModel.swift in Sources */,
 				92D41098246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92038769246514F000ECFCCD /* FlickrList.swift in Sources */,
 				92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */,
+				928B8D5B247F541F00157430 /* ZoomTransitionController.swift in Sources */,
 				92D4109C246BD4FA0071778A /* SearchViewController.swift in Sources */,
 				92D41087246BA5DF0071778A /* UIViewController+.swift in Sources */,
 				920387762465154D00ECFCCD /* SceneDelegate.swift in Sources */,
@@ -592,6 +623,7 @@
 				92038768246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876F2465154100ECFCCD /* Endpoint.swift in Sources */,
 				92D41094246BD21D0071778A /* ImageLoader.swift in Sources */,
+				928B8D57247F53C700157430 /* ZoomDismissalInteractionController.swift in Sources */,
 				9290F138246E33850010AA15 /* PositiveInt.swift in Sources */,
 				924709E72465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				9203878F24651E7D00ECFCCD /* Flickr.swift in Sources */,

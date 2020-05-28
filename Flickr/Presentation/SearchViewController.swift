@@ -49,7 +49,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, ImageListView
 
     // MARK: - ImageListViewControllerDelegate
     
-    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool) {
+    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool, with transitionController: ZoomTransitionController) {
+        navigationController!.delegate = transitionController
         navigationController!.pushViewController(viewController, animated: animated)
     }
 
