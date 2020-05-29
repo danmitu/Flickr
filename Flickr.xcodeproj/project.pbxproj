@@ -47,6 +47,9 @@
 		920387922465294A00ECFCCD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387902465294A00ECFCCD /* Error.swift */; };
 		920387932465294A00ECFCCD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920387902465294A00ECFCCD /* Error.swift */; };
 		9203879824653F7C00ECFCCD /* FlickrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274199224650C5E002981DD /* FlickrUITests.swift */; };
+		922FF1DE248172D900C76011 /* IndexPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FF1DD248172D900C76011 /* IndexPath+.swift */; };
+		922FF1DF248172D900C76011 /* IndexPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FF1DD248172D900C76011 /* IndexPath+.swift */; };
+		922FF1E0248172D900C76011 /* IndexPath+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FF1DD248172D900C76011 /* IndexPath+.swift */; };
 		924709E52465EA9400EC9F9E /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924709E42465EA9400EC9F9E /* Dictionary+.swift */; };
 		924709E62465EA9400EC9F9E /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924709E42465EA9400EC9F9E /* Dictionary+.swift */; };
 		924709E72465EA9400EC9F9E /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924709E42465EA9400EC9F9E /* Dictionary+.swift */; };
@@ -141,6 +144,7 @@
 		92038762246514D700ECFCCD /* FlickrSizesInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSizesInfo.swift; sourceTree = "<group>"; };
 		92038784246518EB00ECFCCD /* Flickr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flickr.swift; sourceTree = "<group>"; };
 		920387902465294A00ECFCCD /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		922FF1DD248172D900C76011 /* IndexPath+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IndexPath+.swift"; sourceTree = "<group>"; };
 		924709E42465EA9400EC9F9E /* Dictionary+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
 		926146D924747F0600001E61 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		926146DE247480D100001E61 /* ImageScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				924709E42465EA9400EC9F9E /* Dictionary+.swift */,
 				92D4109D246BD7AA0071778A /* OptionalTrimmedString.swift */,
 				9290F135246E33850010AA15 /* PositiveInt.swift */,
+				922FF1DD248172D900C76011 /* IndexPath+.swift */,
 				9274197924650C5E002981DD /* Assets.xcassets */,
 				9274197B24650C5E002981DD /* LaunchScreen.storyboard */,
 				9274197E24650C5E002981DD /* Info.plist */,
@@ -512,6 +517,7 @@
 				9203874E24650FDC00ECFCCD /* Endpoint.swift in Sources */,
 				92D41081246BA3DB0071778A /* UIView+.swift in Sources */,
 				92D4107D246BA2660071778A /* JustifiedLayout.swift in Sources */,
+				922FF1DE248172D900C76011 /* IndexPath+.swift in Sources */,
 				920387522465104900ECFCCD /* TestSession.swift in Sources */,
 				9274197324650C5D002981DD /* SceneDelegate.swift in Sources */,
 				92038785246518EB00ECFCCD /* Flickr.swift in Sources */,
@@ -533,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9290F146246E50020010AA15 /* ImageListViewController.swift in Sources */,
+				922FF1DF248172D900C76011 /* IndexPath+.swift in Sources */,
 				920387922465294A00ECFCCD /* Error.swift in Sources */,
 				9203876E2465154000ECFCCD /* TestSession.swift in Sources */,
 				9203876D2465154000ECFCCD /* Session.swift in Sources */,
@@ -589,6 +596,7 @@
 				920387762465154D00ECFCCD /* SceneDelegate.swift in Sources */,
 				92D41083246BA3DB0071778A /* UIView+.swift in Sources */,
 				92D4107F246BA2660071778A /* JustifiedLayout.swift in Sources */,
+				922FF1E0248172D900C76011 /* IndexPath+.swift in Sources */,
 				92038768246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876F2465154100ECFCCD /* Endpoint.swift in Sources */,
 				92D41094246BD21D0071778A /* ImageLoader.swift in Sources */,

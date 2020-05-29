@@ -87,7 +87,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
-        presentPageViewController(for: indexPath.item)
+        presentPageViewController(startingIndexPath: indexPath)
     }
     
     // MARK: - View Lifecycle
@@ -143,171 +143,81 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         return CGSize(size: size)
     }
     
-    // MARK: - Paged Images & ImageScrollViewControllerDelegate
+    // MARK: - ImageScrollViewDelegate
     
-    private var useFullScreen = false
+    /// The setting for all the paged view controllers.
+    private var isFullScreen = false {
+        didSet {
+            pageViewController.viewControllers?.forEach {
+                ($0 as! ImageScrollViewController).isFullScreen = isFullScreen
+            }
+        }
+    }
     
     func didTap(_ imageScrollViewController: ImageScrollViewController) {
-        toggleFullScreen()
+        isFullScreen = !isFullScreen
     }
 
     func didDoubleTap(_ imageScrollViewController: ImageScrollViewController) {
-        toggleFullScreen()
-    }
-
-    private func toggleFullScreen() {
-        useFullScreen = !useFullScreen
-        pageViewController.viewControllers?.forEach {
-            let vc = ($0 as! ImageScrollViewController)
-            vc.isFullScreen = useFullScreen
-        }
+        isFullScreen = !isFullScreen
     }
     
-    // TODO: Nice little comment explaining how I do this part.
+    
+    // MARK: - Paging (UIPageViewControllerDataSource & UIPageViewControllerDelegate)
     
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+
+    private var selectedIndexPath: IndexPath!
+
+    /// Set between transitions
+    private var nextIndexPath: IndexPath!
     
-    /// Uses the view contorller hash value to associate it with an index.
-    private var pageIndex = [Int : Int]()
+    /// Maps a view controller's hash value to it's index path
+    private var viewControllerIndices = [Int : IndexPath]()
     
-    func indexPath(of viewController: UIViewController) -> IndexPath? {
-        if let item = pageIndex[viewController.hashValue] {
-            return IndexPath(item: item, section: 0)
-        }
-        return nil
+    private func indexPath(of viewController: UIViewController) -> IndexPath {
+        viewControllerIndices[viewController.hashValue]!
     }
     
-    private func presentPageViewController(for index: Int) {
-        pageIndex.removeAll() // Reset from a previous session.
-        let vc = imageScrollViewController(for: index)!
-        pageViewController.setViewControllers([vc], direction: .forward, animated: true)
-        pageIndex[vc.hashValue] = index
-        delegate?.imageListViewConroller(self,
-                                         push: pageViewController,
-                                         animated: true)
+    /// Returns a new `ImageScrollViewController` representing the item at the view model `indexPath`.
+    private func imageScrollViewController(for indexPath: IndexPath) -> ImageScrollViewController {
+        print(indexPath.item)
+        let newViewController = ImageScrollViewController()
+        let url = viewModel.item(at: indexPath.item).url
+        newViewController.loadImage(url)
+        newViewController.isFullScreen = isFullScreen
+        newViewController.delegate = self
+        viewControllerIndices[newViewController.hashValue] = indexPath
+        return newViewController
     }
-    
-    /// What's the VC when the user swipes left to right?
+
+    private func presentPageViewController(startingIndexPath: IndexPath) {
+        pageViewController.view.backgroundColor = .systemBackground
+        pageViewController.setViewControllers(
+            [imageScrollViewController(for: startingIndexPath)],
+            direction: .forward,
+            animated: true)
+        delegate?.imageListViewConroller(self, push: pageViewController, animated: true)
+    }
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pageIndex[viewController.hashValue] else { return nil }
-        let prevIndex = index - 1
-        guard let beforeViewController = imageScrollViewController(for: prevIndex) else { return nil }
-        pageIndex[beforeViewController.hashValue] = prevIndex
-        beforeViewController.delegate = self
-        return beforeViewController
+        let indexPathOfViewController = indexPath(of: viewController)
+        guard indexPathOfViewController.isFirstItem == false else { return nil }
+        return imageScrollViewController(for: indexPathOfViewController.decrementingItem())
     }
     
-    /// What's the VC when the user swipes right to left?
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let index = pageIndex[viewController.hashValue]!
-        let nextIndex = index + 1
-        guard let afterViewController = imageScrollViewController(for: nextIndex) else { return nil }
-        pageIndex[afterViewController.hashValue] = nextIndex
-        afterViewController.delegate = self
-        return afterViewController
+        return imageScrollViewController(for: indexPath(of: viewController).incrementingItem())
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        print("willTransitionTo")
-        if let nextViewController = pendingViewControllers.first as? ImageScrollViewController {
-            nextIndexPath = indexPath(of: nextViewController)
-        }
+        let nextViewController = pendingViewControllers.first as! ImageScrollViewController
+        nextIndexPath = indexPath(of: nextViewController)
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         selectedIndexPath = nextIndexPath
         nextIndexPath = nil
     }
-    
-    /// Returns the view controller individual "page" matching the view model data at a given index.
-    private func imageScrollViewController(for index: Int) -> ImageScrollViewController? {
-        guard viewModel.indices.contains(index) else { return nil }
-        let viewController = ImageScrollViewController()
-        let url = viewModel.item(at: index).url
-        viewController.loadImage(url)
-        viewController.isFullScreen = useFullScreen
-        viewController.delegate = self
-        return viewController
-    }
-    
-    private var selectedIndexPath: IndexPath!
-    
-    private var nextIndexPath: IndexPath!
-    
-    //This function prevents the collectionView from accessing a deallocated cell. In the event
-    //that the cell for the selectedIndexPath is nil, a default UIImageView is returned in its place
-    func getImageViewFromCollectionViewCell(for selectedIndexPath: IndexPath) -> UIImageView {
-        
-        //Get the array of visible cells in the collectionView
-        let visibleCells = self.collectionView.indexPathsForVisibleItems
-        
-        //If the current indexPath is not visible in the collectionView,
-        //scroll the collectionView to the cell to prevent it from returning a nil value
-        if !visibleCells.contains(self.selectedIndexPath) {
-           
-            //Scroll the collectionView to the current selectedIndexPath which is offscreen
-            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
-            
-            //Reload the items at the newly visible indexPaths
-            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
-            self.collectionView.layoutIfNeeded()
-            
-            //Guard against nil values
-            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell) else {
-                //Return a default UIImageView
-                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
-            }
-            //The PhotoCollectionViewCell was found in the collectionView, return the image
-            return guardedCell.imageView
-        }
-        else {
-            
-            //Guard against nil return values
-            guard let guardedCell = self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell else {
-                //Return a default UIImageView
-                return UIImageView(frame: CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0))
-            }
-            //The PhotoCollectionViewCell was found in the collectionView, return the image
-            return guardedCell.imageView
-        }
-        
-    }
-    
-    //This function prevents the collectionView from accessing a deallocated cell. In the
-    //event that the cell for the selectedIndexPath is nil, a default CGRect is returned in its place
-    func getFrameFromCollectionViewCell(for selectedIndexPath: IndexPath) -> CGRect {
-        
-        //Get the currently visible cells from the collectionView
-        let visibleCells = self.collectionView.indexPathsForVisibleItems
-        
-        //If the current indexPath is not visible in the collectionView,
-        //scroll the collectionView to the cell to prevent it from returning a nil value
-        if !visibleCells.contains(selectedIndexPath) {
-            
-            //Scroll the collectionView to the cell that is currently offscreen
-            collectionView.scrollToItem(at: selectedIndexPath, at: .centeredVertically, animated: false)
-            
-            //Reload the items at the newly visible indexPaths
-            collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
-            collectionView.layoutIfNeeded()
-            
-            //Prevent the collectionView from returning a nil value
-            guard let guardedCell = (collectionView.cellForItem(at: selectedIndexPath) as? ImageCollectionViewCell) else {
-                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
-            }
-            
-            return guardedCell.frame
-        }
-        //Otherwise the cell should be visible
-        else {
-            //Prevent the collectionView from returning a nil value
-            guard let guardedCell = (collectionView.cellForItem(at: selectedIndexPath) as? ImageCollectionViewCell) else {
-                return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
-            }
-            //The cell was found successfully
-            return guardedCell.frame
-        }
-    }
-        
 }
 
