@@ -29,9 +29,7 @@ class ImageScrollViewController: UIViewController, ImageScrollViewDelegate {
     }
 
     weak var delegate: ImageScrollViewControllerDelegate?
-    
-    let transitionController = ZoomTransitionController()
-    
+        
     private let imageScrollView = ImageScrollView()
     
     override func loadView() {
@@ -63,21 +61,4 @@ class ImageScrollViewController: UIViewController, ImageScrollViewDelegate {
     /// Does nothing by default.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {}
     
-}
-
-extension ImageScrollViewController: ZoomAnimatorDelegate {
-    
-    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-    }
-    
-    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-    }
-    
-    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
-        return imageScrollView.imageView
-    }
-    
-    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
-        return view.convert(imageScrollView.imageView.frame, to: view)
-    }
 }

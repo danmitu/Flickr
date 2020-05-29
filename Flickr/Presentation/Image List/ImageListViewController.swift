@@ -10,16 +10,14 @@ import UIKit
 
 protocol ImageListViewControllerDelegate: class {
     
-    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool, with transitionController: ZoomTransitionController)
+    func imageListViewConroller(_ imageListViewController: ImageListViewController, push viewController: UIViewController, animated: Bool)
     
 }
 
 class ImageListViewController: UICollectionViewController, JustifiedLayoutDelegate, UIPageViewControllerDelegate, UIPageViewControllerDataSource, ImageScrollViewControllerDelegate {
     
     weak var delegate: ImageListViewControllerDelegate?
-    
-    let transitionController = ZoomTransitionController()
-    
+        
     init(viewModel: ImageListViewModel) {
         self.viewModel = viewModel
         let layout = JustifiedLayout()
@@ -186,13 +184,11 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         pageIndex[vc.hashValue] = index
         delegate?.imageListViewConroller(self,
                                          push: pageViewController,
-                                         animated: true,
-                                         with: vc.transitionController)
+                                         animated: true)
     }
     
     /// What's the VC when the user swipes left to right?
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print("Back")
         guard let index = pageIndex[viewController.hashValue] else { return nil }
         let prevIndex = index - 1
         guard let beforeViewController = imageScrollViewController(for: prevIndex) else { return nil }
@@ -203,7 +199,6 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     /// What's the VC when the user swipes right to left?
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print("Front")
         let index = pageIndex[viewController.hashValue]!
         let nextIndex = index + 1
         guard let afterViewController = imageScrollViewController(for: nextIndex) else { return nil }
@@ -213,6 +208,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        print("willTransitionTo")
         if let nextViewController = pendingViewControllers.first as? ImageScrollViewController {
             nextIndexPath = indexPath(of: nextViewController)
         }
@@ -231,8 +227,6 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         viewController.loadImage(url)
         viewController.isFullScreen = useFullScreen
         viewController.delegate = self
-        viewController.transitionController.fromDelegate = self
-        viewController.transitionController.toDelegate = viewController
         return viewController
     }
     
@@ -288,17 +282,17 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         
         //If the current indexPath is not visible in the collectionView,
         //scroll the collectionView to the cell to prevent it from returning a nil value
-        if !visibleCells.contains(self.selectedIndexPath) {
+        if !visibleCells.contains(selectedIndexPath) {
             
             //Scroll the collectionView to the cell that is currently offscreen
-            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .centeredVertically, animated: false)
+            collectionView.scrollToItem(at: selectedIndexPath, at: .centeredVertically, animated: false)
             
             //Reload the items at the newly visible indexPaths
-            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
-            self.collectionView.layoutIfNeeded()
+            collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            collectionView.layoutIfNeeded()
             
             //Prevent the collectionView from returning a nil value
-            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell) else {
+            guard let guardedCell = (collectionView.cellForItem(at: selectedIndexPath) as? ImageCollectionViewCell) else {
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
             
@@ -307,7 +301,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         //Otherwise the cell should be visible
         else {
             //Prevent the collectionView from returning a nil value
-            guard let guardedCell = (self.collectionView.cellForItem(at: self.selectedIndexPath) as? ImageCollectionViewCell) else {
+            guard let guardedCell = (collectionView.cellForItem(at: selectedIndexPath) as? ImageCollectionViewCell) else {
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
             //The cell was found successfully
@@ -317,43 +311,3 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         
 }
 
-extension ImageListViewController: ZoomAnimatorDelegate {
-    
-    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
-        
-    }
-    
-    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
-        
-        let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as! ImageCollectionViewCell
-
-        let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
-
-        if cellFrame.minY < self.collectionView.contentInset.top {
-            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
-        } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
-            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
-        }
-    }
-    
-    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
-        return getImageViewFromCollectionViewCell(for: selectedIndexPath)
-    }
-    
-    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
-        self.view.layoutIfNeeded()
-        self.collectionView.layoutIfNeeded()
-
-        //Get a guarded reference to the cell's frame
-        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
-
-        let cellFrame = self.collectionView.convert(unconvertedFrame, to: self.view)
-
-        if cellFrame.minY < self.collectionView.contentInset.top {
-            return CGRect(x: cellFrame.minX, y: self.collectionView.contentInset.top, width: cellFrame.width, height: cellFrame.height - (self.collectionView.contentInset.top - cellFrame.minY))
-        }
-
-        return cellFrame
-    }
-    
-}
