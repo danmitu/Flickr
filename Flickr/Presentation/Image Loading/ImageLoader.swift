@@ -14,6 +14,9 @@ class ImageLoader {
     private var loadedImages = [URL: UIImage]()
     private var runningRequests = [UUID: URLSessionDataTask]()
 
+    private let mutex = DispatchSemaphore(value: 1)
+    private let queue = DispatchQueue.global(qos: .userInitiated)
+    
     init(session: URLSession = URLSession.shared) {
         self.session = session
     }
@@ -30,8 +33,13 @@ class ImageLoader {
         
         let dataTask = session.load(endpoint) { [weak self] result in
             guard let this = self else { return }
-            // TODO: Thread 8: EXC_BAD_ACCESS (code=EXC_I386_GPFLT)
-            defer { this.runningRequests.removeValue(forKey: id) }
+            defer {
+                this.queue.async {
+                    this.mutex.wait()
+                    this.runningRequests.removeValue(forKey: id)
+                    this.mutex.signal()
+                }
+            }
             switch result {
             case .success(let image):
                 self?.loadedImages[url] = image
@@ -41,13 +49,22 @@ class ImageLoader {
             }
 
         }
-        runningRequests[id] = dataTask
+        queue.async {
+            self.mutex.wait()
+            self.runningRequests[id] = dataTask
+            self.mutex.signal()
+        }
+        
         return id
     }
 
     func cancelLoad(_ uuid: UUID) {
-      runningRequests[uuid]?.cancel()
-      runningRequests.removeValue(forKey: uuid)
+        queue.async {
+            self.mutex.wait()
+            self.runningRequests[uuid]?.cancel()
+            self.runningRequests.removeValue(forKey: uuid)
+            self.mutex.signal()
+        }
     }
     
 }
