@@ -11,7 +11,7 @@ import UIKit
 class ImageLoader {
 
     private var session: URLSession!
-    private var imageCache = NSCache<NSString, UIImage>()
+    private var loadedImages = [URL: UIImage]()
     private var runningRequests = [UUID: URLSessionDataTask]()
 
     init(session: URLSession = URLSession.shared) {
@@ -20,10 +20,7 @@ class ImageLoader {
     
     @discardableResult
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
-        
-        let key = url.absoluteString
-        
-        if let image = imageCache.object(forKey: url.absoluteString as NSString) {
+        if let image = loadedImages[url] {
             completion(.success(image))
             return nil
         }
@@ -36,7 +33,7 @@ class ImageLoader {
             defer { this.runningRequests.removeValue(forKey: id) }
             switch result {
             case .success(let image):
-                this.imageCache.setObject(image, forKey: key as NSString)
+                self?.loadedImages[url] = image
                 completion(.success(image))
             case .failure(let error):
                 completion(.failure(error))
