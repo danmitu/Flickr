@@ -30,6 +30,7 @@ class ImageLoader {
         
         let dataTask = session.load(endpoint) { [weak self] result in
             guard let this = self else { return }
+            // TODO: Thread 8: EXC_BAD_ACCESS (code=EXC_I386_GPFLT)
             defer { this.runningRequests.removeValue(forKey: id) }
             switch result {
             case .success(let image):
