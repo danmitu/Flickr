@@ -1,5 +1,5 @@
 //
-//  ImageListViewModel.swift
+//  ImageListPresenter.swift
 //  Flickr
 //
 //  Created by Dan Mitu on 5/14/20.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// A paginated list of images where each image size is available.
-class ImageListViewModel {
+class ImageListPresenter {
     
     /// Provides the endpoint to update the collection given a page number.
     /// Setting this resets the view model.
@@ -171,7 +171,7 @@ class ImageListViewModel {
     }
 }
 
-extension ImageListViewModel: Collection {
+extension ImageListPresenter: Collection {
         
     typealias CollectionType = [Item]
     typealias Index = CollectionType.Index
