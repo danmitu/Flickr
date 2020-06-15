@@ -181,7 +181,6 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     /// Returns a new `ImageScrollViewController` representing the item at the view model `indexPath`.
     private func imageScrollViewController(for indexPath: IndexPath) -> ImageScrollViewController {
-        print(indexPath.item)
         let newViewController = ImageScrollViewController()
         let url = presenter.item(at: indexPath.item).url
         newViewController.loadImage(url)

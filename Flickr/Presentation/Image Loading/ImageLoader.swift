@@ -2,17 +2,15 @@
 //  ImageLoader.swift
 //  Flickr
 //
-//  Source: https://www.donnywals.com/efficiently-loading-images-in-table-views-and-collection-views/
-//
 
 import UIKit
 
-/// Loads and maintains a cache of `UIImage`. Requests can be canceled.
+/// Keeps track of the currently running image requests and limits
 class ImageLoader {
 
     private var session: URLSession!
-    private var loadedImages = [URL: UIImage]()
-    private var runningRequests = [UUID: URLSessionDataTask]()
+    private var runningIds = [URLRequest: UUID]()
+    private var runningTasks = [UUID: URLSessionDataTask]()
 
     private let mutex = DispatchSemaphore(value: 1)
     private let queue = DispatchQueue.global(qos: .userInitiated)
@@ -23,35 +21,29 @@ class ImageLoader {
     
     @discardableResult
     func loadImage(_ url: URL, _ completion: @escaping (Result<UIImage, Error>) -> Void) -> UUID? {
-        if let image = loadedImages[url] {
-            completion(.success(image))
-            return nil
-        }
-        
         let endpoint = Endpoint(imageURL: url)
-        let id = UUID()
+        let request = endpoint.request
         
+        guard runningIds[request] == nil else { return nil }
+       
+        let id = UUID()
+
         let dataTask = session.load(endpoint) { [weak self] result in
             guard let this = self else { return }
             defer {
                 this.queue.async {
                     this.mutex.wait()
-                    this.runningRequests.removeValue(forKey: id)
+                    this.runningIds.removeValue(forKey: request)
+                    this.runningTasks.removeValue(forKey: id)
                     this.mutex.signal()
                 }
             }
-            switch result {
-            case .success(let image):
-                self?.loadedImages[url] = image
-                completion(.success(image))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-
+            completion(result)
         }
         queue.async {
             self.mutex.wait()
-            self.runningRequests[id] = dataTask
+            self.runningIds[request] = id
+            self.runningTasks[id] = dataTask
             self.mutex.signal()
         }
         
@@ -61,8 +53,8 @@ class ImageLoader {
     func cancelLoad(_ uuid: UUID) {
         queue.async {
             self.mutex.wait()
-            self.runningRequests[uuid]?.cancel()
-            self.runningRequests.removeValue(forKey: uuid)
+            self.runningTasks[uuid]?.cancel()
+            self.runningTasks.removeValue(forKey: uuid)
             self.mutex.signal()
         }
     }
@@ -72,6 +64,7 @@ class ImageLoader {
 struct ImageError: Error {}
 
 extension Endpoint where A == UIImage {
+    /// Creates a `Endpoint<UIImage>` with an explicit cache policy of `returnCacheDataElseLoad`.
     init(imageURL: URL) {
         self = Endpoint(.get, url: imageURL, cachePolicy: .returnCacheDataElseLoad) { data, _ in
             Result {

@@ -2,8 +2,6 @@
 //  SingleImageLoader.swift
 //  Flickr
 //
-//  https://www.donnywals.com/efficiently-loading-images-in-table-views-and-collection-views/
-//
 
 import UIKit
 
