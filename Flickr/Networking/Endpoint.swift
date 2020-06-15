@@ -48,14 +48,14 @@ public struct Endpoint<A> {
             self.parse(value, response).map(f)
         })
     }
-
+    
     /// Transforms the result
     public func compactMap<B>(_ transform: @escaping (A) -> Result<B, Error>) -> Endpoint<B> {
         return Endpoint<B>(request: request, expectedStatusCode: expectedStatusCode, parse: { data, response in
             self.parse(data, response).flatMap(transform)
         })
     }
-
+    
     /// Create a new Endpoint.
     ///
     /// - Parameters:
@@ -69,7 +69,16 @@ public struct Endpoint<A> {
     ///   - timeOutInterval: the timeout interval for his request
     ///   - query: query parameters to append to the url
     ///   - parse: this converts a response into an `A`.
-    public init(_ method: Method, url: URL, accept: ContentType? = nil, contentType: ContentType? = nil, body: Data? = nil, headers: [String:String] = [:], expectedStatusCode: @escaping (Int) -> Bool = expected200to300, timeOutInterval: TimeInterval = 10, query: [String:String] = [:], parse: @escaping (Data?, URLResponse?) -> Result<A, Error>) {
+    public init(_ method: Method,
+                url: URL,
+                accept: ContentType? = nil,
+                contentType: ContentType? = nil,
+                body: Data? = nil, headers: [String:String] = [:],
+                expectedStatusCode: @escaping (Int) -> Bool = expected200to300,
+                timeOutInterval: TimeInterval = 10,
+                cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy,
+                query: [String:String] = [:],
+                parse: @escaping (Data?, URLResponse?) -> Result<A, Error>) {
         var requestUrl : URL
         if query.isEmpty {
             requestUrl = url
@@ -80,6 +89,8 @@ public struct Endpoint<A> {
             requestUrl = comps.url!
         }
         request = URLRequest(url: requestUrl)
+        request.cachePolicy = cachePolicy
+        
         if let a = accept {
             request.setValue(a.rawValue, forHTTPHeaderField: "Accept")
         }
@@ -91,10 +102,10 @@ public struct Endpoint<A> {
         }
         request.timeoutInterval = timeOutInterval
         request.httpMethod = method.rawValue
-
+        
         // body *needs* to be the last property that we set, because of this bug: https://bugs.swift.org/browse/SR-6687
         request.httpBody = body
-
+        
         self.expectedStatusCode = expectedStatusCode
         self.parse = parse
     }
@@ -106,7 +117,9 @@ public struct Endpoint<A> {
     ///   - request: the URL request
     ///   - expectedStatusCode: the status code that's expected. If this returns false for a given status code, parsing fails.
     ///   - parse: this converts a response into an `A`.
-    public init(request: URLRequest, expectedStatusCode: @escaping (Int) -> Bool = expected200to300, parse: @escaping (Data?, URLResponse?) -> Result<A, Error>) {
+    public init(request: URLRequest,
+                expectedStatusCode: @escaping (Int) -> Bool = expected200to300,
+                parse: @escaping (Data?, URLResponse?) -> Result<A, Error>) {
         self.request = request
         self.expectedStatusCode = expectedStatusCode
         self.parse = parse
@@ -135,10 +148,26 @@ extension Endpoint where A == () {
     ///   - expectedStatusCode: the status code that's expected. If this returns false for a given status code, parsing fails.
     ///   - timeOutInterval: the timeout interval for his request
     ///   - query: query parameters to append to the url
-    public init(_ method: Method, url: URL, accept: ContentType? = nil, contentType: ContentType? = nil, body: Data? = nil, headers: [String:String] = [:], expectedStatusCode: @escaping (Int) -> Bool = expected200to300, timeOutInterval: TimeInterval = 10, query: [String:String] = [:]) {
-        self.init(method, url: url, accept: accept, contentType: contentType, body: body, headers: headers, expectedStatusCode: expectedStatusCode, timeOutInterval: timeOutInterval, query: query, parse: { _, _ in .success(()) })
+    public init(_ method: Method,
+                url: URL, accept: ContentType? = nil,
+                contentType: ContentType? = nil,
+                body: Data? = nil,
+                headers: [String:String] = [:],
+                expectedStatusCode: @escaping (Int) -> Bool = expected200to300,
+                timeOutInterval: TimeInterval = 10,
+                cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy,
+                query: [String:String] = [:]) {
+        self.init(method, url: url,
+                  accept: accept,
+                  contentType: contentType,
+                  body: body,
+                  headers: headers,
+                  expectedStatusCode: expectedStatusCode,
+                  timeOutInterval: timeOutInterval,
+                  cachePolicy: cachePolicy,
+                  query: query, parse: { _, _ in .success(()) })
     }
-
+    
     /// Creates a new endpoint without a parse function.
     ///
     /// - Parameters:
@@ -152,9 +181,25 @@ extension Endpoint where A == () {
     ///   - timeOutInterval: the timeout interval for his request
     ///   - query: query parameters to append to the url
     ///   - encoder: the encoder that's used for encoding `A`s.
-    public init<B: Encodable>(json method: Method, url: URL, accept: ContentType? = .json, body: B, headers: [String:String] = [:], expectedStatusCode: @escaping (Int) -> Bool = expected200to300, timeOutInterval: TimeInterval = 10, query: [String:String] = [:], encoder: JSONEncoder = JSONEncoder()) {
+    public init<B: Encodable>(json method: Method,
+                              url: URL, accept: ContentType? = .json,
+                              body: B, headers: [String:String] = [:],
+                              expectedStatusCode: @escaping (Int) -> Bool = expected200to300,
+                              timeOutInterval: TimeInterval = 10,
+                              cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy,
+                              query: [String:String] = [:],
+                              encoder: JSONEncoder = JSONEncoder()) {
         let b = try! encoder.encode(body)
-        self.init(method, url: url, accept: accept, contentType: .json, body: b, headers: headers, expectedStatusCode: expectedStatusCode, timeOutInterval: timeOutInterval, query: query, parse: { _, _ in .success(()) })
+        self.init(method, url: url,
+                  accept: accept,
+                  contentType: .json,
+                  body: b,
+                  headers: headers,
+                  expectedStatusCode: expectedStatusCode,
+                  timeOutInterval: timeOutInterval,
+                  cachePolicy: cachePolicy,
+                  query: query,
+                  parse: { _, _ in .success(()) })
     }
 }
 
@@ -171,15 +216,30 @@ extension Endpoint where A: Decodable {
     ///   - timeOutInterval: the timeout interval for his request
     ///   - query: query parameters to append to the url
     ///   - decoder: the decoder that's used for decoding `A`s.
-    public init(json method: Method, url: URL, accept: ContentType = .json, headers: [String: String] = [:], expectedStatusCode: @escaping (Int) -> Bool = expected200to300, timeOutInterval: TimeInterval = 10, query: [String: String] = [:], decoder: JSONDecoder = JSONDecoder()) {
-        self.init(method, url: url, accept: accept, body: nil, headers: headers, expectedStatusCode: expectedStatusCode, timeOutInterval: timeOutInterval, query: query) { data, _ in
-            return Result {
-                guard let dat = data else { throw NoDataError() }
-                return try decoder.decode(A.self, from: dat)
-            }
+    public init(json method: Method,
+                url: URL,
+                accept: ContentType = .json,
+                headers: [String: String] = [:],
+                expectedStatusCode: @escaping (Int) -> Bool = expected200to300,
+                timeOutInterval: TimeInterval = 10,
+                cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy,
+                query: [String: String] = [:],
+                decoder: JSONDecoder = JSONDecoder()) {
+        self.init(method, url: url,
+                  accept: accept,
+                  body: nil,
+                  headers: headers,
+                  expectedStatusCode: expectedStatusCode,
+                  timeOutInterval: timeOutInterval,
+                  cachePolicy: cachePolicy,
+                  query: query) { data, _ in
+                    return Result {
+                        guard let dat = data else { throw NoDataError() }
+                        return try decoder.decode(A.self, from: dat)
+                    }
         }
     }
-
+    
     /// Creates a new endpoint.
     ///
     /// - Parameters:
@@ -193,13 +253,32 @@ extension Endpoint where A: Decodable {
     ///   - query: query parameters to append to the url
     ///   - decoder: the decoder that's used for decoding `A`s.
     ///   - encoder: the encoder that's used for encoding `A`s.
-    public init<B: Encodable>(json method: Method, url: URL, accept: ContentType = .json, body: B? = nil, headers: [String: String] = [:], expectedStatusCode: @escaping (Int) -> Bool = expected200to300, timeOutInterval: TimeInterval = 10, query: [String: String] = [:], decoder: JSONDecoder = JSONDecoder(), encoder: JSONEncoder = JSONEncoder()) {
+    public init<B: Encodable>(json method: Method,
+                              url: URL,
+                              accept: ContentType = .json,
+                              body: B? = nil,
+                              headers: [String: String] = [:],
+                              expectedStatusCode: @escaping (Int) -> Bool = expected200to300,
+                              timeOutInterval: TimeInterval = 10,
+                              cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy,
+                              query: [String: String] = [:],
+                              decoder: JSONDecoder = JSONDecoder(),
+                              encoder: JSONEncoder = JSONEncoder()) {
         let b = body.map { try! encoder.encode($0) }
-        self.init(method, url: url, accept: accept, contentType: .json, body: b, headers: headers, expectedStatusCode: expectedStatusCode, timeOutInterval: timeOutInterval, query: query) { data, _ in
-            return Result {
-                guard let dat = data else { throw NoDataError() }
-                return try decoder.decode(A.self, from: dat)
-            }
+        self.init( method,
+                   url: url,
+                   accept: accept,
+                   contentType: .json,
+                   body: b,
+                   headers: headers,
+                   expectedStatusCode: expectedStatusCode,
+                   timeOutInterval: timeOutInterval,
+                   cachePolicy: cachePolicy,
+                   query: query) { data, _ in
+                    return Result {
+                        guard let dat = data else { throw NoDataError() }
+                        return try decoder.decode(A.self, from: dat)
+                    }
         }
     }
 }
@@ -276,11 +355,11 @@ extension URLSession {
                 guard let h = resp as? HTTPURLResponse else {
                     throw UnknownError()
                 }
-
+                
                 guard e.expectedStatusCode(h.statusCode) else {
                     throw WrongStatusCodeError(statusCode: h.statusCode, response: h, responseBody: data)
                 }
-
+                
                 return try e.parse(data, resp).get()
         }
         .eraseToAnyPublisher()
