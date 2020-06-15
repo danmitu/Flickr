@@ -12,7 +12,7 @@ import Foundation
 class ImageListPresenter {
     
     /// Provides the endpoint to update the collection given a page number.
-    /// Setting this resets the view model.
+    /// Setting this resets the presenter.
     var endpointSource: ((Int)->Endpoint<FlickrList>)? { didSet { reset() } }
     
     // MARK: - Initialization

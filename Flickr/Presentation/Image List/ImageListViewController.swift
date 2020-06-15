@@ -101,7 +101,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         collectionView.backgroundColor = .systemBackground
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.reuseIdentifier)
         
-        // View Model
+        // Presenter
         
         presenter.forNewPage { [weak self] items in
             self?.stopAnimatingActivityIndicator()
@@ -179,7 +179,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         viewControllerIndices[viewController.hashValue]!
     }
     
-    /// Returns a new `ImageScrollViewController` representing the item at the view model `indexPath`.
+    /// Returns a new `ImageScrollViewController` representing the item at the presenter `indexPath`.
     private func imageScrollViewController(for indexPath: IndexPath) -> ImageScrollViewController {
         let newViewController = ImageScrollViewController()
         let url = presenter.item(at: indexPath.item).url
