@@ -73,7 +73,7 @@ struct ImageError: Error {}
 
 extension Endpoint where A == UIImage {
     init(imageURL: URL) {
-        self = Endpoint(.get, url: imageURL) { data, _ in
+        self = Endpoint(.get, url: imageURL, cachePolicy: .returnCacheDataElseLoad) { data, _ in
             Result {
                 guard let d = data, let i = UIImage(data: d) else { throw ImageError() }
                 return i
