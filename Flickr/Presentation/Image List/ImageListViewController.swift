@@ -39,12 +39,12 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     private lazy var dataSource = DataSource(collectionView: collectionView) {
         [weak self] collectionView, indexPath, identifier in
-        guard let this = self else { return nil }
-        if this.shouldLoadNextPage(given: indexPath) {
-            this.presenter.appendNewPage()
+        guard let self = self else { return nil }
+        if self.shouldLoadNextPage(given: indexPath) {
+            self.presenter.appendNewPage()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
-        let url = this.presenter.item(at: indexPath.item).url
+        let url = self.presenter.item(at: indexPath.item).url
         cell.imageView.loadImage(at: url)
         return cell
     }

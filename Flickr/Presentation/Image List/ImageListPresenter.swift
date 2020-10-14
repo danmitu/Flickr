@@ -121,19 +121,19 @@ class ImageListPresenter {
         let listTaskId = UUID()
         /// ** Load List**
         let listTask = session.download(endpoint) { [weak self] result in
-            guard let this = self else { return }
-            this.runningTasks[listTaskId] = nil
+            guard let self = self else { return }
+            self.runningTasks[listTaskId] = nil
             switch result {
             case let .failure(error):
-                this.notifyObservers(error: error)
-                this.isLoadingNextPage = false
+                self.notifyObservers(error: error)
+                self.isLoadingNextPage = false
             case let .success(list):
                 // Zips the size for each photo in the list.
                 let zip = DispatchGroup()
                 var items = [Identifier : Item]()
                 let images = list.page.array
                 // Make sure an image isn't inserted more than once (e.g. page 1 is loaded, an image from page 1 moves to page 2, then page 2 is loaded)
-                let newImages = images.filter { !this.identifiers.contains($0.id) }
+                let newImages = images.filter { !self.identifiers.contains($0.id) }
                 var idsWithSizes = Set<Identifier>()
                 /// ** For each image...**
                 newImages.forEach { image in
@@ -143,7 +143,7 @@ class ImageListPresenter {
                     /// ** Load Image Size**
                     let sizeTask = session.download(sizesEndpoint) { result in
                         defer { zip.leave() }
-                        this.runningTasks[sizeId] = nil
+                        self.runningTasks[sizeId] = nil
                         switch result {
                         case let .failure(error):
                             error.log()
@@ -155,14 +155,14 @@ class ImageListPresenter {
                                                    size: size)
                         }
                     }
-                    this.runningTasks[sizeId] = sizeTask
+                    self.runningTasks[sizeId] = sizeTask
                 }
                 zip.notify(queue: .main) { [weak self] in
-                    guard let this = self else { return }
+                    guard let self = self else { return }
                     let ids = list.page.array.map({ $0.id }).filter({ idsWithSizes.contains($0) })
-                    this.isLoadingNextPage = false
-                    this.update(imageList: list, newItems: items)
-                    this.notifyObservers(newPages: ids)
+                    self.isLoadingNextPage = false
+                    self.update(imageList: list, newItems: items)
+                    self.notifyObservers(newPages: ids)
                 }
             }
         }

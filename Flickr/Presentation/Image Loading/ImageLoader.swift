@@ -29,13 +29,13 @@ class ImageLoader {
         let id = UUID()
 
         let dataTask = session.load(endpoint) { [weak self] result in
-            guard let this = self else { return }
+            guard let self = self else { return }
             defer {
-                this.queue.async {
-                    this.mutex.wait()
-                    this.runningIds.removeValue(forKey: request)
-                    this.runningTasks.removeValue(forKey: id)
-                    this.mutex.signal()
+                self.queue.async {
+                    self.mutex.wait()
+                    self.runningIds.removeValue(forKey: request)
+                    self.runningTasks.removeValue(forKey: id)
+                    self.mutex.signal()
                 }
             }
             completion(result)
