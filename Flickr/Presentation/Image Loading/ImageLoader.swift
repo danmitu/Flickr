@@ -13,7 +13,7 @@ class ImageLoader {
     private var runningTasks = [UUID: URLSessionDataTask]()
 
     private let mutex = DispatchSemaphore(value: 1)
-    private let queue = DispatchQueue.global(qos: .userInitiated)
+    private let queue = DispatchQueue(label: "Flickr.ImageLoader", qos: .userInteractive)
     
     init(session: URLSession = URLSession.shared) {
         self.session = session
@@ -30,15 +30,13 @@ class ImageLoader {
 
         let dataTask = session.load(endpoint) { [weak self] result in
             guard let self = self else { return }
-            defer {
-                self.queue.async {
-                    self.mutex.wait()
-                    self.runningIds.removeValue(forKey: request)
-                    self.runningTasks.removeValue(forKey: id)
-                    self.mutex.signal()
-                }
-            }
             completion(result)
+            self.queue.async {
+                self.mutex.wait()
+                self.runningIds.removeValue(forKey: request)
+                self.runningTasks.removeValue(forKey: id)
+                self.mutex.signal()
+            }
         }
         queue.async {
             self.mutex.wait()
