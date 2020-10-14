@@ -18,10 +18,6 @@ class SingleImageLoader {
     
     private let imageLoader = ImageLoader()
     private var uuidMap = [UIImageView: UUID]()
-
-    func load(_ url: URL) {
-        imageLoader.loadImage(url) { _ in return }
-    }
     
     func load(_ url: URL, for imageView: UIImageView) {
         let token = imageLoader.loadImage(url) { r in
