@@ -8,8 +8,6 @@
 
 import Foundation
 
-typealias Identifier = String
-
 /// Load a plist from a bundle. Return it as a dictionary.
 func propertyList(_ resource: String, bundle: Bundle) -> [String:AnyObject] {
 

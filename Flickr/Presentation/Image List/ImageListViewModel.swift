@@ -11,6 +11,8 @@ import Foundation
 /// A paginated list of images where each image size is available.
 class ImageListViewModel {
     
+    typealias Identifier = String
+    
     /// Provides the endpoint to update the collection given a page number.
     /// Setting this resets the viewModel.
     var endpointSource: ((Int)->Endpoint<FlickrList>)? { didSet { reset() } }
@@ -98,7 +100,6 @@ class ImageListViewModel {
         DispatchQueue.main.async {
             self.observations.pageLoaded.values.forEach { $0(identifiers) }
         }
-        
     }
     
     private func notifyObservers(error: Error) {
