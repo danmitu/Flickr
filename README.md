@@ -4,7 +4,7 @@ A demo iOS client app for Flickr.
 The goal of this app is to...
 
 - Practice networking
-- Practice MVP
+- Practice MVVM
 - Practice using XCTest
 
 This project will eventually be able to...
