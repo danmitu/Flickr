@@ -20,7 +20,8 @@ class SingleImageLoader {
     private var uuidMap = [UIImageView: UUID]()
         
     func load(_ url: URL, for imageView: UIImageView) {
-        let token = imageLoader.loadImage(url) { [self] r in
+        let token = imageLoader.loadImage(url) { [weak self] r in
+            guard let self = self else { return }
             defer { self.uuidMap.removeValue(forKey: imageView) }
             switch r {
             case .success(let image):
