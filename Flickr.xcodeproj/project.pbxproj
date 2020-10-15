@@ -66,13 +66,13 @@
 		9274197A24650C5E002981DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9274197924650C5E002981DD /* Assets.xcassets */; };
 		9274197D24650C5E002981DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9274197B24650C5E002981DD /* LaunchScreen.storyboard */; };
 		9274198824650C5E002981DD /* FlickrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9274198724650C5E002981DD /* FlickrTests.swift */; };
-		9290F132246E2DE30010AA15 /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListPresenter.swift */; };
-		9290F133246E2DE30010AA15 /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListPresenter.swift */; };
-		9290F134246E2DE30010AA15 /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListPresenter.swift */; };
+		9290F132246E2DE30010AA15 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListViewModel.swift */; };
+		9290F133246E2DE30010AA15 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListViewModel.swift */; };
+		9290F134246E2DE30010AA15 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F131246E2DE30010AA15 /* ImageListViewModel.swift */; };
 		9290F136246E33850010AA15 /* PositiveInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F135246E33850010AA15 /* PositiveInt.swift */; };
 		9290F137246E33850010AA15 /* PositiveInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F135246E33850010AA15 /* PositiveInt.swift */; };
 		9290F138246E33850010AA15 /* PositiveInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F135246E33850010AA15 /* PositiveInt.swift */; };
-		9290F13D246E3F0C0010AA15 /* ImageListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F13C246E3F0C0010AA15 /* ImageListPresenterTests.swift */; };
+		9290F13D246E3F0C0010AA15 /* ImageListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F13C246E3F0C0010AA15 /* ImageListViewModelTests.swift */; };
 		9290F145246E50020010AA15 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F144246E50020010AA15 /* ImageListViewController.swift */; };
 		9290F146246E50020010AA15 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F144246E50020010AA15 /* ImageListViewController.swift */; };
 		9290F147246E50020010AA15 /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290F144246E50020010AA15 /* ImageListViewController.swift */; };
@@ -82,9 +82,9 @@
 		92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
 		92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
 		92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF0246A4B7E003F3437 /* OSLog+.swift */; };
-		92B19FF5246A4C37003F3437 /* TextSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* TextSearchPresenter.swift */; };
-		92B19FF6246A4C37003F3437 /* TextSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* TextSearchPresenter.swift */; };
-		92B19FF7246A4C37003F3437 /* TextSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* TextSearchPresenter.swift */; };
+		92B19FF5246A4C37003F3437 /* TextSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* TextSearchViewModel.swift */; };
+		92B19FF6246A4C37003F3437 /* TextSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* TextSearchViewModel.swift */; };
+		92B19FF7246A4C37003F3437 /* TextSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B19FF4246A4C37003F3437 /* TextSearchViewModel.swift */; };
 		92D4107D246BA2660071778A /* JustifiedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4107C246BA2660071778A /* JustifiedLayout.swift */; };
 		92D4107E246BA2660071778A /* JustifiedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4107C246BA2660071778A /* JustifiedLayout.swift */; };
 		92D4107F246BA2660071778A /* JustifiedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D4107C246BA2660071778A /* JustifiedLayout.swift */; };
@@ -162,13 +162,13 @@
 		9274198E24650C5E002981DD /* FlickrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9274199224650C5E002981DD /* FlickrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrUITests.swift; sourceTree = "<group>"; };
 		9274199424650C5E002981DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9290F131246E2DE30010AA15 /* ImageListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListPresenter.swift; sourceTree = "<group>"; };
+		9290F131246E2DE30010AA15 /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
 		9290F135246E33850010AA15 /* PositiveInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositiveInt.swift; sourceTree = "<group>"; };
-		9290F13C246E3F0C0010AA15 /* ImageListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListPresenterTests.swift; sourceTree = "<group>"; };
+		9290F13C246E3F0C0010AA15 /* ImageListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModelTests.swift; sourceTree = "<group>"; };
 		9290F144246E50020010AA15 /* ImageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewController.swift; sourceTree = "<group>"; };
 		9290F14C246E5C420010AA15 /* TextResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextResultsViewController.swift; sourceTree = "<group>"; };
 		92B19FF0246A4B7E003F3437 /* OSLog+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+.swift"; sourceTree = "<group>"; };
-		92B19FF4246A4C37003F3437 /* TextSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchPresenter.swift; sourceTree = "<group>"; };
+		92B19FF4246A4C37003F3437 /* TextSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewModel.swift; sourceTree = "<group>"; };
 		92D4107C246BA2660071778A /* JustifiedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustifiedLayout.swift; sourceTree = "<group>"; };
 		92D41080246BA3DB0071778A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		92D41084246BA5DF0071778A /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 		9265CAE724663AF1003F3777 /* ImageListViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
-				9290F13C246E3F0C0010AA15 /* ImageListPresenterTests.swift */,
+				9290F13C246E3F0C0010AA15 /* ImageListViewModelTests.swift */,
 				9265CB3F24665403003F3777 /* flickr.photos.getSize.goose */,
 				9265CB4024665403003F3777 /* flickr.photos.search.goose */,
 			);
@@ -337,7 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				92D4107C246BA2660071778A /* JustifiedLayout.swift */,
-				9290F131246E2DE30010AA15 /* ImageListPresenter.swift */,
+				9290F131246E2DE30010AA15 /* ImageListViewModel.swift */,
 				9290F144246E50020010AA15 /* ImageListViewController.swift */,
 				9290F150246E62E90010AA15 /* Text Search */,
 			);
@@ -348,7 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				9290F14C246E5C420010AA15 /* TextResultsViewController.swift */,
-				92B19FF4246A4C37003F3437 /* TextSearchPresenter.swift */,
+				92B19FF4246A4C37003F3437 /* TextSearchViewModel.swift */,
 			);
 			path = "Text Search";
 			sourceTree = "<group>";
@@ -508,7 +508,7 @@
 				920387502465102200ECFCCD /* Session.swift in Sources */,
 				9290F14D246E5C420010AA15 /* TextResultsViewController.swift in Sources */,
 				9274197124650C5D002981DD /* AppDelegate.swift in Sources */,
-				9290F132246E2DE30010AA15 /* ImageListPresenter.swift in Sources */,
+				9290F132246E2DE30010AA15 /* ImageListViewModel.swift in Sources */,
 				92D41096246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92B19FF1246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92038763246514D700ECFCCD /* FlickrSizesInfo.swift in Sources */,
@@ -524,7 +524,7 @@
 				92D41092246BD21D0071778A /* ImageLoader.swift in Sources */,
 				9290F136246E33850010AA15 /* PositiveInt.swift in Sources */,
 				924709E52465EA9400EC9F9E /* Dictionary+.swift in Sources */,
-				92B19FF5246A4C37003F3437 /* TextSearchPresenter.swift in Sources */,
+				92B19FF5246A4C37003F3437 /* TextSearchViewModel.swift in Sources */,
 				92D4108D246BB2630071778A /* ImageCollectionViewCell.swift in Sources */,
 				920387912465294A00ECFCCD /* Error.swift in Sources */,
 				920387612465149200ECFCCD /* FlickrList.swift in Sources */,
@@ -549,11 +549,11 @@
 				920387742465154D00ECFCCD /* Utility.swift in Sources */,
 				920387722465154D00ECFCCD /* AppDelegate.swift in Sources */,
 				9290F14E246E5C420010AA15 /* TextResultsViewController.swift in Sources */,
-				92B19FF6246A4C37003F3437 /* TextSearchPresenter.swift in Sources */,
+				92B19FF6246A4C37003F3437 /* TextSearchViewModel.swift in Sources */,
 				92038765246514F000ECFCCD /* FlickrList.swift in Sources */,
 				9203878E24651E7C00ECFCCD /* Flickr.swift in Sources */,
 				9290F137246E33850010AA15 /* PositiveInt.swift in Sources */,
-				9290F133246E2DE30010AA15 /* ImageListPresenter.swift in Sources */,
+				9290F133246E2DE30010AA15 /* ImageListViewModel.swift in Sources */,
 				920387732465154D00ECFCCD /* SceneDelegate.swift in Sources */,
 				92D41082246BA3DB0071778A /* UIView+.swift in Sources */,
 				9274198824650C5E002981DD /* FlickrTests.swift in Sources */,
@@ -562,7 +562,7 @@
 				92038764246514F000ECFCCD /* KeyedDecodingContainer+.swift in Sources */,
 				9203876C2465154000ECFCCD /* Endpoint.swift in Sources */,
 				92D41086246BA5DF0071778A /* UIViewController+.swift in Sources */,
-				9290F13D246E3F0C0010AA15 /* ImageListPresenterTests.swift in Sources */,
+				9290F13D246E3F0C0010AA15 /* ImageListViewModelTests.swift in Sources */,
 				92B19FF2246A4B7E003F3437 /* OSLog+.swift in Sources */,
 				92D4107E246BA2660071778A /* JustifiedLayout.swift in Sources */,
 				92D4108A246BB1B20071778A /* CGSize+.swift in Sources */,
@@ -587,7 +587,7 @@
 				920387772465154D00ECFCCD /* Utility.swift in Sources */,
 				9290F14F246E5C420010AA15 /* TextResultsViewController.swift in Sources */,
 				920387752465154D00ECFCCD /* AppDelegate.swift in Sources */,
-				9290F134246E2DE30010AA15 /* ImageListPresenter.swift in Sources */,
+				9290F134246E2DE30010AA15 /* ImageListViewModel.swift in Sources */,
 				92D41098246BD22E0071778A /* SingleImageLoader.swift in Sources */,
 				92038769246514F000ECFCCD /* FlickrList.swift in Sources */,
 				92B19FF3246A4B7E003F3437 /* OSLog+.swift in Sources */,
@@ -603,7 +603,7 @@
 				9290F138246E33850010AA15 /* PositiveInt.swift in Sources */,
 				924709E72465EA9400EC9F9E /* Dictionary+.swift in Sources */,
 				9203878F24651E7D00ECFCCD /* Flickr.swift in Sources */,
-				92B19FF7246A4C37003F3437 /* TextSearchPresenter.swift in Sources */,
+				92B19FF7246A4C37003F3437 /* TextSearchViewModel.swift in Sources */,
 				92D4108F246BB2630071778A /* ImageCollectionViewCell.swift in Sources */,
 				920387932465294A00ECFCCD /* Error.swift in Sources */,
 				9203876B246514F000ECFCCD /* FlickrError.swift in Sources */,

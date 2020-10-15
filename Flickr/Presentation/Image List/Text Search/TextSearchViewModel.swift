@@ -1,5 +1,5 @@
 //
-//  TextSearchPresenter.swift
+//  TextSearchViewModel.swift
 //  Flickr
 //
 //  Created by Dan Mitu on 5/11/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TextSearchPresenter: ImageListPresenter {
+class TextSearchViewModel: ImageListViewModel {
 
     @TrimmedString private(set) var query: String = ""
     

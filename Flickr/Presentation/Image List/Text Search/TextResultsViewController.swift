@@ -14,16 +14,16 @@ class TextResultsViewController: ImageListViewController {
         didSet {
             reset()
             guard let textQuery = textQuery else { return }
-            presenter.search(query: textQuery)
+            viewModel.search(query: textQuery)
         }
     }
     
-    private let presenter: TextSearchPresenter
+    private let viewModel: TextSearchViewModel
     
     init() {
-        let presenter = TextSearchPresenter()
-        self.presenter = presenter
-        super.init(presenter: presenter)
+        let viewModel = TextSearchViewModel()
+        self.viewModel = viewModel
+        super.init(viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) {

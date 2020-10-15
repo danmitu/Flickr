@@ -15,9 +15,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, ImageListView
     private let searchResultsViewController = TextResultsViewController()
     
     private let defaultContentViewController: ImageListViewController = {
-        let presenter = ImageListPresenter()
-        presenter.endpointSource = { Flickr().interesting(page: $0, perPage: 30) }
-        return ImageListViewController(presenter: presenter)
+        let viewModel = ImageListViewModel()
+        viewModel.endpointSource = { Flickr().interesting(page: $0, perPage: 30) }
+        return ImageListViewController(viewModel: viewModel)
     }()
     
     override func viewDidLoad() {

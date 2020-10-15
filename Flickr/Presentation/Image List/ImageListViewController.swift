@@ -18,8 +18,8 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     
     weak var delegate: ImageListViewControllerDelegate?
         
-    init(presenter: ImageListPresenter) {
-        self.presenter = presenter
+    init(viewModel: ImageListViewModel) {
+        self.viewModel = viewModel
         let layout = JustifiedLayout()
         super.init(collectionViewLayout: layout)
         layout.delegate = self
@@ -29,7 +29,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         fatalError("init(coder:) is not supported")
     }
     
-    private let presenter: ImageListPresenter
+    private let viewModel: ImageListViewModel
 
     typealias Item = String
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
@@ -41,21 +41,21 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         [weak self] collectionView, indexPath, identifier in
         guard let self = self else { return nil }
         if self.shouldLoadNextPage(given: indexPath) {
-            self.presenter.appendNewPage()
+            self.viewModel.appendNewPage()
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
-        let url = self.presenter.item(at: indexPath.item).url
+        let url = self.viewModel.item(at: indexPath.item).url
         cell.imageView.loadImage(at: url)
         return cell
     }
     
     func startLoadingPages() {
         startAnimatingActivityIndicator()
-        presenter.appendNewPage()
+        viewModel.appendNewPage()
     }
     
     func reset() {
-        presenter.reset()
+        viewModel.reset()
         var snapshot = Snapshot()
         if snapshot.numberOfSections == 0 { snapshot.appendSections([.main]) }
         dataSource.apply(snapshot)
@@ -101,14 +101,14 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         collectionView.backgroundColor = .systemBackground
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.reuseIdentifier)
         
-        // Presenter
+        // View Model
         
-        presenter.forNewPage { [weak self] items in
+        viewModel.forNewPage { [weak self] items in
             self?.stopAnimatingActivityIndicator()
             self?.apply(newItems: items)
         }
         
-        presenter.forError { [weak self] error in
+        viewModel.forError { [weak self] error in
             self?.stopAnimatingActivityIndicator()
             self?.presentErrorAlert(error)
         }
@@ -139,7 +139,7 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
     private let fallbackSize = CGSize(width: 100, height: 100)
     
     func collectionView(_ collectionView: UICollectionView, layout: JustifiedLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let size = presenter.item(at: indexPath.item).size else { return fallbackSize }
+        guard let size = viewModel.item(at: indexPath.item).size else { return fallbackSize }
         return CGSize(size: size)
     }
     
@@ -179,10 +179,10 @@ class ImageListViewController: UICollectionViewController, JustifiedLayoutDelega
         viewControllerIndices[viewController.hashValue]!
     }
     
-    /// Returns a new `ImageScrollViewController` representing the item at the presenter `indexPath`.
+    /// Returns a new `ImageScrollViewController` representing the item at the viewModel `indexPath`.
     private func imageScrollViewController(for indexPath: IndexPath) -> ImageScrollViewController {
         let newViewController = ImageScrollViewController()
-        let url = presenter.item(at: indexPath.item).url
+        let url = viewModel.item(at: indexPath.item).url
         newViewController.loadImage(url)
         newViewController.isFullScreen = isFullScreen
         newViewController.delegate = self
