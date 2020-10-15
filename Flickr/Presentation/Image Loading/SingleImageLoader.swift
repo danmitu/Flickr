@@ -18,9 +18,9 @@ class SingleImageLoader {
     
     private let imageLoader = ImageLoader()
     private var uuidMap = [UIImageView: UUID]()
-    
+        
     func load(_ url: URL, for imageView: UIImageView) {
-        let token = imageLoader.loadImage(url) { r in
+        let token = imageLoader.loadImage(url) { [self] r in
             defer { self.uuidMap.removeValue(forKey: imageView) }
             switch r {
             case .success(let image):
@@ -36,8 +36,8 @@ class SingleImageLoader {
 
     func cancel(for imageView: UIImageView) {
         if let uuid = uuidMap[imageView] {
-          imageLoader.cancelLoad(uuid)
-          uuidMap.removeValue(forKey: imageView)
+            imageLoader.cancelLoad(uuid)
+            uuidMap.removeValue(forKey: imageView)
         }
     }
     
